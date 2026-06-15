@@ -59,6 +59,35 @@
       text-align: center;
       border: 1px solid rgba(255,255,255,0.08);
     }
+    .trip-companions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px;
+        font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .companions-label {
+        font-weight: bold;
+        font-size: 1.1rem;
+        background: #f0f0f0;
+        padding: 5px 12px;
+        border-radius: 30px;
+    }
+    .companion-pill {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        transition: transform 0.1s ease;
+    }
+    .companion-pill:hover {
+        transform: scale(1.02);
+        background-color: #ffffff;
+    }
     .day-section { margin-top: 18px; }
     .day-header {
       position: sticky;
@@ -193,16 +222,17 @@
   <main class="wrap">
     <header class="trip-hero">
       <h1 class="trip-title">阿榮 衝出香港 ～ 邁向日本第一步</h1>
-      <div class="trip-companions">
-        <span class="companions-label">同行人：</span>
-        <div class="companions-list">
-          <span class="companion-pill">Alex</span>
-          <span class="companion-pill">Carman</span>
-          <span class="companion-pill">Lily</span>
-          <span class="companion-pill">Jeffery</span>
-          <span class="companion-pill">Anthony</span>
-        </div>
-      </div>
+         <div class="trip-companions">
+    <span class="companions-label">同行人：</span>
+    <div class="companions-list">
+         <span class="companion-pill" style="color: purple;">Alex</span>
+            <span class="companion-pill" style="color: hotpink;">Lily</span>
+            <span class="companion-pill" style="color: blue;">Jeffery</span>
+            <span class="companion-pill" style="color: #4ECDC4;">Jojo</span>
+            <span class="companion-pill" style="color: green;">Anthony</span>
+            <span class="companion-pill" style="color: #FFD966; text-shadow: 0 0 1px rgba(0,0,0,0.2);">Carman</span>
+    </div>
+</div>         
     </header>
     <section class="day-section">
       <div class="day-header">📅 Day 1：那霸市區巡禮</div>
