@@ -12,9 +12,9 @@
 
 ### 行程總覽
 - Day 1：租車那霸市區（國際通、牧志市場）
-- Day 2：美國村、DMM 水族館、Outlet
+- Day 2：DMM 水族館、Outlet 、瀨長島 、club one
 - Day 3：浮潛： 青之洞窟、萬座毛、AEON Mall
 - Day 4：美麗海水族館、古宇利島、PARCO CITY
-- Day 5：瀨長島、還車回程
+- Day 5：西來院達摩寺、還車回程
 
 > 地圖連結皆為 Google Maps 精確搜尋，點擊即可導航。
