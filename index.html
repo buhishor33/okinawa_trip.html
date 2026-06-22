@@ -81,24 +81,11 @@
       background-clip: text;
       color: transparent;
     }
-    .trip-companions {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 20px 0 10px;
-    }
-    .companions-label {
-      font-weight: bold;
-      background: var(--surface-2);
-      padding: 5px 12px;
-      border-radius: 30px;
-    }
     .companion-pills {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 16px;
+      margin: 16px 0 20px;
     }
     .companion-pill {
       padding: 4px 12px;
@@ -215,47 +202,40 @@
       .spot-top { flex-direction: column; align-items: flex-start; }
       .btn-group { align-self: flex-start; }
     }
-/* 停車場按鈕專用樣式 */
-.parking-map-btn {
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: 40px;
-  font-weight: 700;
-  font-size: 0.82rem;
-  text-decoration: none;
-  color: #fff !important;
-  margin: 3px 6px 3px 0;
-  border: 1px solid rgba(255,255,255,0.15);
-  transition: 0.15s ease;
-  letter-spacing: 0.5px;
-}
-.parking-map-btn:hover {
-  transform: scale(1.04);
-  filter: brightness(0.92);
-}
-.parking-map-btn.free {
-  background: #1a8c4a; /* 免費綠 */
-}
-.parking-map-btn.paid {
-  background: #c0392b; /* 收費紅 */
-}
-body.dark .parking-map-btn.free { background: #27ae60; }
-body.dark .parking-map-btn.paid { background: #e74c3c; }
 
-.parking-address {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--muted);
-  margin-top: 4px;
-  line-height: 1.4;
-}
-.parking-tip {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-top: 2px;
-  font-weight: 400;
-}
+    /* ===== 泊車資訊專用樣式 ===== */
+    .parking-tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    .parking-tag.free { background: #27ae60; color: #fff; }
+    .parking-tag.paid { background: #e74c3c; color: #fff; }
+    body.dark .parking-tag.free { background: #2ecc71; }
+    body.dark .parking-tag.paid { background: #ff6b6b; }
+
+    .parking-detail {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: 4px 0 2px;
+      line-height: 1.5;
+    }
+    .parking-detail strong { color: var(--text); }
+    .business-hours {
+      background: var(--surface-2);
+      padding: 8px 12px;
+      border-radius: 10px;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 16px;
+    }
+    .business-hours .day { color: var(--muted); }
+    .business-hours .time { font-weight: 600; }
   </style>
 </head>
 <body>
@@ -274,115 +254,163 @@ body.dark .parking-map-btn.paid { background: #e74c3c; }
     <span class="companion-pill" style="color: green;">Anthony</span>
     <span class="companion-pill" style="color: #FFD966; text-shadow: 0 0 1px rgba(0,0,0,0.2);">Carman</span>
   </div>
-<!-- ===== 停車場速查表（折疊，獨立 Sheet） ===== -->
-<div class="day-section" style="margin-top: 16px;">
-  <div class="day-header" data-day="parking">
-    <span>🅿️ 停車場速查表（點我展開／收合）</span>
-    <span class="toggle-icon">▶</span>
-  </div>
-  <div class="day-content collapsed" id="dayContentparking">
-    <div style="background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:10px 12px; margin-top:12px; box-shadow:var(--shadow); overflow-x:auto;">
-      <table style="width:100%; border-collapse:collapse; font-size:0.85rem; min-width:480px;">
-        <thead>
-          <tr style="background:var(--surface-2);">
-            <th style="padding:8px 6px; text-align:left; border-bottom:2px solid var(--border); width:12%;">日期</th>
-            <th style="padding:8px 6px; text-align:left; border-bottom:2px solid var(--border); width:22%;">景點</th>
-            <th style="padding:8px 6px; text-align:left; border-bottom:2px solid var(--border); width:66%;">停車場按鈕＋地址</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Day 1 -->
-          <tr><td style="padding:8px 6px; border-bottom:1px solid var(--border);">Day 1</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">國際通</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%83%AA%E3%82%A6%E3%83%9C%E3%82%A6+%E9%A7%90%E8%BB%8A%E5%A0%B4+%E9%82%A3%E8%A6%87" target="_blank" class="parking-map-btn paid">💰 琉貿百貨</a>
-              <a href="https://www.google.com/maps/search/?api=1&query=%E5%9C%8B%E9%9A%9B%E9%80%9A%E3%82%8A+%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0" target="_blank" class="parking-map-btn paid">💰 沿線Coin P</a>
-              <span class="parking-address">〒900-0015 那覇市久茂地1-1-1（琉貿）／國際通沿線</span>
-              <span class="parking-tip">⏱ 約 200～300 円/小時</span>
-            </td>
-          </tr>
-          <!-- Day 2 -->
-          <tr><td style="padding:8px 6px; border-bottom:1px solid var(--border);">Day 2</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">瀨長島</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%A6%E3%83%9F%E3%82%AB%E3%82%B8%E3%83%86%E3%83%A9%E3%82%B9+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" class="parking-map-btn free">🆓 專用P</a>
-              <span class="parking-address">〒901-0233 豊見城市瀬長174-6</span>
-              <span class="parking-tip">假日午後可能需排隊</span>
-            </td>
-          </tr>
-          <tr><td style="padding:8px 6px; border-bottom:1px solid var(--border);">Day 2</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">Outlet Ashibinaa</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%82%B7%E3%83%93%E3%83%8A%E3%82%A2%E3%82%A6%E3%83%88%E3%83%AC%E3%83%83%E3%83%88+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" class="parking-map-btn free">🆓 平面／立體</a>
-              <span class="parking-address">〒901-0225 豊見城市豊崎1-188</span>
-              <span class="parking-tip">離場前記下區域編號</span>
-            </td>
-          </tr>
-          <!-- Day 3 -->
-          <tr><td style="padding:8px 6px; border-bottom:1px solid var(--border);">Day 3</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">真榮田岬（青洞）</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E7%9C%9F%E6%A0%84%E7%94%B0%E5%B2%AC+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" class="parking-map-btn paid">💰 真栄田岬P</a>
-              <span class="parking-address">〒904-0417 恩納村真栄田469-1</span>
-              <span class="parking-tip">Map Code: 206 062 685*71 ｜ 約 500 円/日，09:00 前到</span>
-            </td>
-          </tr>
-          <tr><td style="padding:8px 6px; border-bottom:1px solid var(--border);">Day 3</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">AEON MALL Rycom</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%B2%96%E7%B8%84%E3%83%A9%E3%82%A4%E3%82%AB%E3%83%A0+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" class="parking-map-btn free">🆓 屋頂／平面</a>
-              <span class="parking-address">〒901-2300 中頭郡北中城村泡瀬</span>
-              <span class="parking-tip">可停 3,000 台以上</span>
-            </td>
-          </tr>
-          <!-- Day 4 -->
-          <tr><td style="padding:8px 6px; border-bottom:1px solid var(--border);">Day 4</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">美麗海水族館</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E3%81%97%E3%81%84%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" class="parking-map-btn free">🆓 第1～第5P</a>
-              <span class="parking-address">〒905-0206 国頭郡本部町石川424</span>
-              <span class="parking-tip">建議停第3停車場，離入口最近</span>
-            </td>
-          </tr>
-          <tr><td style="padding:8px 6px; border-bottom:1px solid var(--border);">Day 4</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">古宇利海洋塔</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E3%82%BF%E3%83%AF%E3%83%BC+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" class="parking-map-btn free">🆓 塔下專用</a>
-              <span class="parking-address">〒905-0406 国頭郡今帰仁村古宇利538</span>
-              <span class="parking-tip">可直接開上展望台入口</span>
-            </td>
-          </tr>
-          <tr><td style="padding:8px 6px; border-bottom:1px solid var(--border);">Day 4</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">心形岩</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%83%8F%E3%83%BC%E3%83%88%E3%83%AD%E3%83%83%E3%82%AF+%E5%8F%A4%E5%AE%87%E5%88%A9%E5%B3%B6+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" class="parking-map-btn paid">💰 臨時P</a>
-              <span class="parking-address">〒905-0406 国頭郡今帰仁村古宇利</span>
-              <span class="parking-tip">約 200～300 円/次，備零錢</span>
-            </td>
-          </tr>
-          <!-- Day 5 -->
-          <tr><td style="padding:8px 6px; border-bottom:1px solid var(--border);">Day 5</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">達摩寺</td>
-            <td style="padding:8px 6px; border-bottom:1px solid var(--border);">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%9D%A5%E9%99%A2+%E9%81%94%E6%91%A9%E5%AF%BA+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank" class="parking-map-btn free">🆓 境內（少數）</a>
-              <span class="parking-address">〒903-0815 那覇市首里赤田町1-5-1</span>
-              <span class="parking-tip">車位極少，建議 08:30 前到</span>
-            </td>
-          </tr>
-          <tr><td style="padding:8px 6px;">Day 5</td>
-            <td style="padding:8px 6px;">Oki Blues 還車</td>
-            <td style="padding:8px 6px;">
-              <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%AA%E3%82%AD%E3%83%96%E3%83%AB%E3%83%BC%E3%82%BA+%E9%82%A3%E8%A6%87" target="_blank" class="parking-map-btn paid">🅿️ 租車公司附設</a>
-              <span class="parking-address">〒900-0021 那覇市泉崎1-11-1</span>
-              <span class="parking-tip">⛽ 還車前記得加滿油</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+  <!-- ============================================================ -->
+  <!-- 🚗 泊車資訊（全新折疊區塊） -->
+  <!-- ============================================================ -->
+  <div class="day-section">
+    <div class="day-header" data-day="parking">
+      <span>🚗 泊車資訊（點我展開／收合）</span>
+      <span class="toggle-icon">▶</span>
+    </div>
+    <div class="day-content collapsed" id="dayContentparking">
+
+      <!-- 路易威登沖繩店 -->
+      <div class="spot-card">
+        <div class="spot-top">
+          <span class="time-badge">🛍️ 精品</span>
+          <div class="btn-group">
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Louis+Vuitton+Okinawa+T+Galleria" target="_blank">🗺️ 導航</a>
+            <a class="ig-btn" href="https://www.instagram.com/explore/tags/louisvuittonokinawa/" target="_blank">📸 #louisvuittonokinawa</a>
+          </div>
+        </div>
+        <h3>路易威登沖繩店</h3>
+        <p class="spot-note">那霸市Omoromachi 4-1 T Galleria, 〒900-0006</p>
+        <div class="comment-box">
+          <div style="display:flex; flex-wrap:wrap; gap:4px 16px; margin-bottom:6px;">
+            <span>📞 <a href="tel:0120594119" style="color:var(--primary);">0120-59-4119</a></span>
+            <span>⏰ 10:00～20:00（每日）</span>
+          </div>
+          <div style="background:var(--surface-2); padding:8px 12px; border-radius:10px; font-size:0.85rem;">
+            <strong>🔹 預約方式</strong>：僅提供店內預約<br>
+            <span style="color:var(--muted);">📅 已預約時間：？？？</span>
+          </div>
+          <div style="margin-top:8px; font-size:0.82rem; color:var(--muted);">
+            🅿️ 停車：T Galleria 附設停車場（購物可折抵）
+          </div>
+        </div>
+      </div>
+
+      <!-- Day 1 國際通周邊停車 -->
+      <div class="spot-card">
+        <div class="spot-top">
+          <span class="time-badge">Day 1</span>
+          <div class="btn-group">
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%9C%8B%E9%9A%9B%E9%80%9A+%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0" target="_blank">🗺️ 周邊停車</a>
+          </div>
+        </div>
+        <h3>國際通周邊停車</h3>
+        <p class="parking-detail">
+          <span class="parking-tag paid">收費</span>
+          <strong>琉貿百貨停車場</strong> 〒900-0015 那覇市久茂地1-1-1
+        </p>
+        <p class="parking-detail">
+          <span class="parking-tag paid">收費</span>
+          <strong>國際通沿線 Coin Parking</strong> 多處，約 200～300 円/小時
+        </p>
+      </div>
+
+      <!-- Day 2 景點停車 -->
+      <div class="spot-card">
+        <div class="spot-top">
+          <span class="time-badge">Day 2</span>
+          <div class="btn-group">
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%80%A8%E9%95%B7%E5%B3%B6+%E3%82%A6%E3%83%9F%E3%82%AB%E3%82%B8%E3%83%86%E3%83%A9%E3%82%B9+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 瀨長島</a>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%82%B7%E3%83%93%E3%83%8A%E3%82%A2%E3%82%A6%E3%83%88%E3%83%AC%E3%83%83%E3%83%88+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank">🗺️ Outlet</a>
+          </div>
+        </div>
+        <h3>Day 2 停車資訊</h3>
+        <p class="parking-detail">
+          <span class="parking-tag free">免費</span>
+          <strong>瀨長島 Umikaji Terrace</strong> 專用停車場<br>
+          〒901-0233 豊見城市瀬長174-6
+        </p>
+        <p class="parking-detail">
+          <span class="parking-tag free">免費</span>
+          <strong>Outlet Mall Ashibinaa</strong> 平面／立體停車場<br>
+          〒901-0225 豊見城市豊崎1-188
+        </p>
+      </div>
+
+      <!-- Day 3 景點停車 -->
+      <div class="spot-card">
+        <div class="spot-top">
+          <span class="time-badge">Day 3</span>
+          <div class="btn-group">
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%9C%9F%E6%A0%84%E7%94%B0%E5%B2%AC+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 真榮田岬</a>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%B2%96%E7%B8%84%E3%83%A9%E3%82%A4%E3%82%AB%E3%83%A0+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ AEON</a>
+          </div>
+        </div>
+        <h3>Day 3 停車資訊</h3>
+        <p class="parking-detail">
+          <span class="parking-tag paid">收費</span>
+          <strong>真榮田岬（青洞）</strong> 約 500 円/日<br>
+          〒904-0417 恩納村真栄田469-1<br>
+          <span style="font-size:0.75rem; color:var(--muted);">Map Code: 206 062 685*71 ｜ 建議 09:00 前到</span>
+        </p>
+        <p class="parking-detail">
+          <span class="parking-tag free">免費</span>
+          <strong>AEON MALL Rycom</strong> 屋頂／平面，可停 3,000 台以上<br>
+          〒901-2300 中頭郡北中城村泡瀬
+        </p>
+      </div>
+
+      <!-- Day 4 景點停車 -->
+      <div class="spot-card">
+        <div class="spot-top">
+          <span class="time-badge">Day 4</span>
+          <div class="btn-group">
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E3%81%97%E3%81%84%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 水族館</a>
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E3%82%BF%E3%83%AF%E3%83%BC+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 海洋塔</a>
+          </div>
+        </div>
+        <h3>Day 4 停車資訊</h3>
+        <p class="parking-detail">
+          <span class="parking-tag free">免費</span>
+          <strong>美麗海水族館</strong> 第1～第5停車場<br>
+          〒905-0206 国頭郡本部町石川424<br>
+          <span style="font-size:0.75rem; color:var(--muted);">建議停第3停車場，離入口最近</span>
+        </p>
+        <p class="parking-detail">
+          <span class="parking-tag free">免費</span>
+          <strong>古宇利海洋塔</strong> 塔下專用停車場<br>
+          〒905-0406 国頭郡今帰仁村古宇利538
+        </p>
+        <p class="parking-detail">
+          <span class="parking-tag paid">收費</span>
+          <strong>心形岩</strong> 臨時停車場，約 200～300 円/次<br>
+          〒905-0406 国頭郡今帰仁村古宇利
+        </p>
+      </div>
+
+      <!-- Day 5 景點停車 -->
+      <div class="spot-card">
+        <div class="spot-top">
+          <span class="time-badge">Day 5</span>
+          <div class="btn-group">
+            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%9D%A5%E9%99%A2+%E9%81%94%E6%91%A9%E5%AF%BA+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 達摩寺</a>
+          </div>
+        </div>
+        <h3>Day 5 停車資訊</h3>
+        <p class="parking-detail">
+          <span class="parking-tag free">免費</span>
+          <strong>西來院達摩寺</strong> 境內停車（車位極少）<br>
+          〒903-0815 那覇市首里赤田町1-5-1<br>
+          <span style="font-size:0.75rem; color:var(--muted);">建議 08:30 前到，或停放附近收費停車場</span>
+        </p>
+        <p class="parking-detail">
+          <span class="parking-tag paid">收費</span>
+          <strong>Oki Blues 還車</strong> 租車公司附設停車場<br>
+          〒900-0021 那覇市泉崎1-11-1<br>
+          <span style="font-size:0.75rem; color:var(--muted);">⛽ 還車前記得加滿油</span>
+        </p>
+      </div>
+
     </div>
   </div>
-</div>
-<!-- ===== 停車場區塊結束 ===== -->
+  <!-- ===== 泊車資訊區塊結束 ===== -->
+
+  <!-- ========================= DAY 1 ========================= -->
   <div class="day-section">
     <div class="day-header" data-day="1">
       <span>📅 Day 1｜15/7/2026 (三) 那霸市區(國際通)</span>
@@ -485,6 +513,7 @@ body.dark .parking-map-btn.paid { background: #e74c3c; }
     </div>
   </div>
 
+  <!-- ========================= DAY 2 ========================= -->
   <div class="day-section">
     <div class="day-header" data-day="2">
       <span>📅 Day 2｜16/7/2026 (四) 租車・水族館・Outlet・瀨長島日落</span>
@@ -594,6 +623,7 @@ body.dark .parking-map-btn.paid { background: #e74c3c; }
     </div>
   </div>
 
+  <!-- ========================= DAY 3 ========================= -->
   <div class="day-section">
     <div class="day-header" data-day="3">
       <span>📅 Day 3｜17/7/2026 (五) 青洞浮潛・萬座毛・AEON Mall</span>
@@ -651,7 +681,7 @@ body.dark .parking-map-btn.paid { background: #e74c3c; }
           <span class="time-badge">18:00</span>
           <div class="btn-group">
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=AEON+MALL+Rycom+Okinawa" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%B2%96%E7%B8%84%E3%83%A9%E3%82%A4%E3%82%A3%E3%83%A0/" target="_blank">📸 #イオンモール沖縄ライカム</a>
+            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%B2%96%E7%B8%84%E3%83%A9%E3%82%A4%E3%82%AB%E3%83%A0/" target="_blank">📸 #イオンモール沖縄ライカム</a>
           </div>
         </div>
         <h3>🏬 AEON MALL Rycom</h3>
@@ -660,6 +690,7 @@ body.dark .parking-map-btn.paid { background: #e74c3c; }
     </div>
   </div>
 
+  <!-- ========================= DAY 4 ========================= -->
   <div class="day-section">
     <div class="day-header" data-day="4">
       <span>📅 Day 4｜18/7/2026 (六) 美麗海水族館・古宇利島・PARCO CITY</span>
@@ -683,7 +714,7 @@ body.dark .parking-map-btn.paid { background: #e74c3c; }
           <span class="time-badge">15:30</span>
           <div class="btn-group">
             <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E5%A1%94" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E3%82%BF%E3%83%AUnder/" target="_blank">📸 #古宇利海洋タワー</a>
+            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E3%82%BF%E3%83%AF%E3%83%BC/" target="_blank">📸 #古宇利海洋タワー</a>
           </div>
         </div>
         <h3>🗼 古宇利海洋塔</h3>
@@ -715,6 +746,7 @@ body.dark .parking-map-btn.paid { background: #e74c3c; }
     </div>
   </div>
 
+  <!-- ========================= DAY 5 ========================= -->
   <div class="day-section">
     <div class="day-header" data-day="5">
       <span>📅 Day 5｜19/7/2026 (日) 達摩寺參拜・從容還車</span>
@@ -774,7 +806,7 @@ body.dark .parking-map-btn.paid { background: #e74c3c; }
 </div>
 
 <script>
-  // 折疊功能
+  // 折疊功能（支援所有 data-day）
   const headers = document.querySelectorAll('.day-header');
   headers.forEach(header => {
     header.addEventListener('click', () => {
