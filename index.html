@@ -1,918 +1,2314 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>沖繩自駕5天4夜</title>
+  <title>阿榮沖出香港～沖繩自駕5天4夜指南</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans TC"', 'sans-serif'],
+          },
+          colors: {
+            okinawa: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              200: '#bae0fd',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+              900: '#0a3a5c',
+            },
+            coral: {
+              500: '#ff6b6b',
+              600: '#fa5252',
+            }
+          },
+          boxShadow: {
+            'premium': '0 10px 30px -5px rgba(2, 132, 199, 0.08), 0 4px 12px -2px rgba(2, 132, 199, 0.03)',
+            'premium-dark': '0 10px 30px -5px rgba(0, 0, 0, 0.3), 0 4px 12px -2px rgba(0, 0, 0, 0.2)',
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    :root {
-      --bg: #f5f7fb;
-      --surface: #ffffff;
-      --surface-2: #eef4ff;
-      --text: #152033;
-      --muted: #61708a;
-      --primary: #0c5adb;
-      --primary-dark: #083d94;
-      --border: #dce5f3;
-      --shadow: 0 10px 25px rgba(15, 35, 95, 0.08);
-      --note-bg: #f8fbff;
-      --note-border: #cfe0ff;
-      --day-header-bg: #eef4ff;
-      --toggle-btn-bg: #eef4ff;
-      --toggle-btn-color: #083d94;
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
     }
-    body.dark {
-      --bg: #121826;
-      --surface: #1e2436;
-      --surface-2: #2a3146;
-      --text: #eef2ff;
-      --muted: #a0aec0;
-      --primary: #5a9eff;
-      --primary-dark: #3b82f6;
-      --border: #334155;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      --note-bg: #1e2a3a;
-      --note-border: #2d4a6e;
-      --day-header-bg: #1e2a3a;
-      --toggle-btn-bg: #2d3748;
-      --toggle-btn-color: #e2e8f0;
+    ::-webkit-scrollbar-track {
+      background: transparent;
     }
-    * { box-sizing: border-box; transition: background-color 0.2s, color 0.2s, border-color 0.2s; }
-    body {
-      margin: 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
+    ::-webkit-scrollbar-thumb {
+      background: #bae0fd;
+      border-radius: 10px;
     }
-    .wrap {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 16px 14px 28px;
+    .dark ::-webkit-scrollbar-thumb {
+      background: #1e293b;
     }
-    .mode-toggle { display: flex; justify-content: flex-end; margin-bottom: 16px; }
-    .mode-btn {
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 16px;
-      border-radius: 40px;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 0.85rem;
-      backdrop-filter: blur(4px);
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
     }
-    .mode-btn:hover { background: var(--primary); color: white; }
-    .trip-title {
-      font-size: 1.7rem;
-      font-weight: 800;
-      margin: 0 0 8px;
-      background: linear-gradient(135deg, #2c1e1a, #4e362e);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
-    body.dark .trip-title {
-      background: linear-gradient(135deg, #f0b27a, #f7dc6f);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .companion-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 16px 0 20px;
-    }
-    .companion-pill {
-      padding: 4px 12px;
-      border-radius: 30px;
-      font-weight: 600;
-      background: var(--surface);
-      border: 1px solid var(--border);
-    }
-    .day-section { margin-top: 24px; border-radius: 20px; overflow: hidden; }
-    .day-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--day-header-bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 16px;
-      font-weight: 800;
-      font-size: 1rem;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.2s;
-      margin-bottom: 0;
-    }
-    .day-header:hover { filter: brightness(0.97); }
-    .toggle-icon { font-size: 1.2rem; font-weight: bold; transition: transform 0.2s; }
-    .day-content {
+    .glow-card {
+      position: relative;
       overflow: hidden;
-      transition: max-height 0.4s ease-out, opacity 0.3s;
-      max-height: 5000px;
-      opacity: 1;
+    }
+    .glow-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.13) 100%);
+      transform: skewX(-25deg);
+      transition: 0.75s;
+    }
+    .glow-card:hover::after {
+      left: 120%;
+    }
+
+    /* ===== 手風琴與統一樣式兼容 ===== */
+    .day-section {
+      @apply mb-6 rounded-3xl overflow-hidden border border-gray-200/60 dark:border-slate-800 shadow-premium dark:shadow-premium-dark bg-white/70 dark:bg-slate-900/70 backdrop-blur-md;
+    }
+    .day-header {
+      @apply w-full text-left p-5 flex items-center justify-between focus:outline-none bg-gradient-to-r from-okinawa-500/10 to-sky-500/10 dark:from-okinawa-950/20 dark:to-sky-950/20 text-okinawa-800 dark:text-okinawa-300 font-extrabold text-lg cursor-pointer transition-all duration-300;
+    }
+    .day-header:hover {
+      @apply opacity-90;
+    }
+    .day-content {
+      @apply transition-all duration-300 overflow-hidden bg-white/60 dark:bg-slate-900/40 backdrop-blur-sm;
     }
     .day-content.collapsed {
-      max-height: 0;
-      opacity: 0;
-      visibility: collapse;
-      margin-top: 0;
+      max-height: 0 !important;
+      opacity: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    .parking-tag {
+      @apply inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold mr-1.5;
+    }
+    .parking-tag.free {
+      @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300;
+    }
+    .parking-tag.paid {
+      @apply bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300;
+    }
+    .parking-detail {
+      @apply text-xs text-gray-600 dark:text-gray-300 mt-2 border-t border-dashed border-gray-100 dark:border-slate-800 pt-2;
     }
     .spot-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
-      margin-top: 12px;
-      margin-bottom: 0;
-      box-shadow: var(--shadow);
+      @apply bg-white dark:bg-slate-900 rounded-3xl p-5 border border-gray-200/60 dark:border-slate-800 shadow-premium dark:shadow-premium-dark mb-4 transition duration-300;
     }
-    .spot-card:first-of-type { margin-top: 12px; }
-    .spot-card:last-child { margin-bottom: 0; }
+    .spot-card:last-child {
+      @apply mb-0;
+    }
     .spot-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
+      @apply flex justify-between items-start gap-3 flex-wrap mb-3;
     }
     .time-badge {
-      background: #fff4cf;
-      padding: 6px 12px;
-      border-radius: 40px;
-      font-weight: 800;
-      color: #9a4b00;
-      display: inline-block;
+      @apply px-3 py-1 bg-[#fff4cf] text-[#9a4b00] dark:bg-[#4a3b1a] dark:text-[#ffdd99] rounded-full text-sm font-extrabold tracking-wide;
     }
-    body.dark .time-badge { background: #4a3b1a; color: #ffdd99; }
-    .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn-group {
+      @apply flex gap-1.5 flex-wrap;
+    }
     .map-btn, .ig-btn {
-      text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
+      border: 1.5px solid #d1d5db;
     }
-    .map-btn { background: var(--primary); color: white; }
-    .ig-btn {
-      background: linear-gradient(45deg, #fccc4d, #f77737, #e4405f);
-      color: white;
-      text-shadow: 0 0 1px rgba(0,0,0,0.2);
+    .dark .map-btn, .dark .ig-btn {
+      border-color: #475569;
     }
-    .comment-box {
-      background: var(--note-bg);
-      border-left: 3px solid var(--primary);
-      padding: 10px 12px;
-      margin: 12px 0 0;
-      border-radius: 12px;
+    .meta-box {
+      @apply bg-slate-50 dark:bg-slate-950/40 p-4 rounded-2xl text-xs space-y-1.5 mt-3 border-l-4 border-okinawa-500;
     }
-    .comment-title {
-      font-weight: bold;
-      margin-bottom: 6px;
+    .meta-header {
+      @apply flex flex-wrap justify-between text-[11px] text-gray-400 dark:text-gray-500 border-b border-gray-200/50 dark:border-slate-800/80 pb-1.5 mb-1.5 gap-2;
     }
-    .comment-box ul {
-      margin: 0;
-      padding-left: 20px;
-    }
-    .rental-highlight {
-      background: #fef9e6;
-      border-left: 4px solid #f5a623;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 12px;
-    }
-    body.dark .rental-highlight { background: #2d2a1a; border-left-color: #e67e22; }
-    .footer {
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.8rem;
-      margin-top: 30px;
-    }
-    @media (max-width: 640px) {
-      .spot-top { flex-direction: column; align-items: flex-start; }
-      .btn-group { align-self: flex-start; }
-    }
-
-    /* ===== 泊車資訊專用樣式 ===== */
-    .parking-tag {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      margin-right: 6px;
-    }
-    .parking-tag.free { background: #27ae60; color: #fff; }
-    .parking-tag.paid { background: #e74c3c; color: #fff; }
-    body.dark .parking-tag.free { background: #2ecc71; }
-    body.dark .parking-tag.paid { background: #ff6b6b; }
-
-    .parking-detail {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin: 4px 0 2px;
-      line-height: 1.5;
-    }
-    .parking-detail strong { color: var(--text); }
-    .business-hours {
-      background: var(--surface-2);
-      padding: 8px 12px;
-      border-radius: 10px;
-      margin-top: 8px;
-      font-size: 0.82rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px 16px;
-    }
-    .business-hours .day { color: var(--muted); }
-    .business-hours .time { font-weight: 600; }
   </style>
 </head>
-<body>
-<div class="wrap">
-  <div class="mode-toggle">
-    <button class="mode-btn" id="darkModeToggle">🌙 黑暗模式 / ☀️ 淺色模式</button>
-  </div>
+<body class="bg-[#f4f8fc] text-[#1e293b] dark:bg-[#0f172a] dark:text-[#f1f5f9] min-h-screen font-sans antialiased pb-24 transition-colors duration-300">
 
-  <h1 class="trip-title">阿榮 衝出香港 擁抱日本～<br><span style="font-size:0.9rem;">未出發 先興奮</span></h1>
-  
-  <div class="companion-pills">
-    <span class="companion-pill" style="color: purple;">Alex</span>
-    <span class="companion-pill" style="color: hotpink;">Lily</span>
-    <span class="companion-pill" style="color: blue;">Jeffery</span>
-    <span class="companion-pill" style="color: #4ECDC4;">Jojo</span>
-    <span class="companion-pill" style="color: green;">Anthony</span>
-    <span class="companion-pill" style="color: #FFD966; text-shadow: 0 0 1px rgba(0,0,0,0.2);">Carman</span>
-  </div>
+  <div class="absolute top-0 inset-x-0 h-80 bg-gradient-to-b from-[#bae0fd] to-transparent dark:from-[#0b2545] opacity-40 -z-10 pointer-events-none"></div>
 
-  <!-- ============================================================ -->
-  <!-- 🚗 泊車資訊（全新折疊區塊） -->
-  <!-- ============================================================ -->
-  <div class="day-section">
-    <div class="day-header" data-day="parking">
-      <span>🚗 泊車資訊（點我展開／收合）</span>
-      <span class="toggle-icon">▶</span>
+  <!-- 客製化通知 UI (取代原生的 alert) -->
+  <div id="toastContainer" class="fixed top-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- 主容器 -->
+  <div class="max-w-6xl mx-auto px-4 pt-6 md:pt-10">
+
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-okinawa-100 text-okinawa-800 dark:bg-okinawa-900/40 dark:text-okinawa-200 text-xs font-bold tracking-wider mb-2">
+          ✈️ OKINAWA ROAD TRIP 2026
+        </div>
+        <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-okinawa-700 to-sky-500 dark:from-okinawa-200 dark:to-cyan-400 bg-clip-text text-transparent">
+          阿榮 衝出香港 擁抱日本～
+        </h1>
+        <p class="text-sm md:text-base text-gray-500 dark:text-gray-400 font-medium mt-1">
+          🌴 <span class="text-okinawa-600 dark:text-okinawa-300 font-bold">未出發 先興奮！</span> 沖繩自駕 5 天 4 夜尊榮探險計劃
+        </p>
+      </div>
+
+      <!-- 主題切換按鈕 -->
+      <button id="themeToggle" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-xs md:text-sm font-bold text-gray-900 rounded-full group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-md transition-all duration-300 self-end md:self-auto">
+        <span class="relative px-4 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-950 rounded-full group-hover:bg-opacity-0 flex items-center gap-2">
+          <span class="dark:hidden">🌙 深色模式</span>
+          <span class="hidden dark:inline">☀️ 淺色模式</span>
+        </span>
+      </button>
+    </header>
+
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <!-- 旅伴陣容 -->
+      <div class="lg:col-span-2 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md rounded-3xl p-6 border border-white/20 dark:border-slate-800 shadow-premium dark:shadow-premium-dark">
+        <h2 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+          👥 頂奢黃金冒險隊成員
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <!-- Alex -->
+          <div class="flex items-center gap-3 p-3 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-100/50 dark:border-purple-900/30">
+            <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+            <div>
+              <p class="font-bold text-purple-700 dark:text-purple-300">Alex</p>
+              <p class="text-[10px] text-gray-400">🧸 玩具獵人 / 模型</p>
+            </div>
+          </div>
+          <!-- Lily -->
+          <div class="flex items-center gap-3 p-3 rounded-2xl bg-pink-50/50 dark:bg-pink-950/20 border border-pink-100/50 dark:border-pink-900/30">
+            <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+            <div>
+              <p class="font-bold text-pink-700 dark:text-pink-300">Lily</p>
+              <p class="text-[10px] text-gray-400">🌿 自然風景愛好者</p>
+            </div>
+          </div>
+          <!-- Jeffery -->
+          <div class="flex items-center gap-3 p-3 rounded-2xl bg-blue-50/50 dark:bg-blue-950/20 border border-blue-100/50 dark:border-blue-900/30">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            <div>
+              <p class="font-bold text-blue-700 dark:text-blue-300">Jeffery</p>
+              <p class="text-[10px] text-gray-400">🚗 王牌司機 / 接大佬</p>
+            </div>
+          </div>
+          <!-- Jojo -->
+          <div class="flex items-center gap-3 p-3 rounded-2xl bg-teal-50/50 dark:bg-teal-950/20 border border-teal-100/50 dark:border-teal-900/30">
+            <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+            <div>
+              <p class="font-bold text-teal-700 dark:text-teal-300">Jojo</p>
+              <p class="text-[10px] text-gray-400">🌊 潛水好手</p>
+            </div>
+          </div>
+          <!-- Anthony -->
+          <div class="flex items-center gap-3 p-3 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-100/50 dark:border-emerald-900/30">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <div>
+              <p class="font-bold text-emerald-700 dark:text-emerald-300">Anthony</p>
+              <p class="text-[10px] text-gray-400">🍜 美食雷達</p>
+            </div>
+          </div>
+          <!-- Carman -->
+          <div class="flex items-center gap-3 p-3 rounded-2xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-100/50 dark:border-amber-900/30">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            <div>
+              <p class="font-bold text-amber-700 dark:text-amber-400">Carman</p>
+              <p class="text-[10px] text-gray-400">🛍️ 雜貨精品狂熱</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 自駕愛車 & 旅行進度條 -->
+      <div class="bg-gradient-to-br from-okinawa-600 to-sky-700 text-white rounded-3xl p-6 shadow-premium dark:shadow-none flex flex-col justify-between">
+        <div>
+          <h2 class="text-xs font-bold text-sky-200 uppercase tracking-widest mb-3 flex items-center justify-between">
+            <span>🚗 豪華自駕戰車</span>
+            <span class="px-2 py-0.5 rounded bg-sky-500/30 text-[10px]">4 天 56,000円</span>
+          </h2>
+          <p class="text-xl font-extrabold">Toyota Vellfire 20系</p>
+          <p class="text-xs text-sky-100/80 mt-1">安心全險保駕護航 | 4天頂奢舒適空間</p>
+        </div>
+
+        <div class="mt-6 pt-6 border-t border-sky-500/30">
+          <div class="flex justify-between text-xs text-sky-200 font-bold mb-2">
+            <span>🎯 沖繩征服進度</span>
+            <span id="progressText">0% (0/0)</span>
+          </div>
+          <div class="w-full bg-sky-950/50 rounded-full h-3 overflow-hidden p-0.5 border border-sky-400/20">
+            <div id="progressBar" class="bg-gradient-to-r from-cyan-300 to-emerald-300 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 廣告或智能伴旅頂部 Banner -->
+    <div class="bg-gradient-to-r from-[#bae0fd] to-[#e0effe] dark:from-sky-950/40 dark:to-slate-900 border border-sky-200/40 dark:border-sky-800/40 p-4 rounded-3xl mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+      <div class="flex items-center gap-3">
+        <span class="text-3xl">✨</span>
+        <div>
+          <h4 class="font-bold text-sm text-okinawa-800 dark:text-okinawa-200">全新解鎖：Gemini AI 沖繩伴旅功能已上線！</h4>
+          <p class="text-xs text-gray-500 dark:text-gray-400">現在可以一鍵獲取「AI 備案推薦」，或在右下角直接諮詢 AI 行程顧問。</p>
+        </div>
+      </div>
+      <button onclick="openChatWithPrompt('大家提議在沖繩多去一些隱藏景點，你有什麼推薦？')" class="px-4 py-2 bg-gradient-to-r from-okinawa-600 to-sky-500 text-white rounded-xl text-xs font-bold shadow-md hover:opacity-90 transition whitespace-nowrap">
+        ✨ 諮詢 AI 秘書
+      </button>
     </div>
-    <div class="day-content collapsed" id="dayContentparking">
 
-      <!-- 路易威登沖繩店 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">🛍️ 精品</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Louis+Vuitton+Okinawa+T+Galleria" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/louisvuittonokinawa/" target="_blank">📸 #louisvuittonokinawa</a>
-          </div>
+    <div class="sticky top-0 z-30 bg-[#f4f8fc]/90 dark:bg-[#0f172a]/90 backdrop-blur-md py-4 mb-6 border-b border-gray-200/50 dark:border-slate-800/80">
+      <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3">
+        <!-- 景點分類篩選 -->
+        <div class="flex gap-1.5 overflow-x-auto pb-1 no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0" id="filterContainer">
+          <button data-filter="all" class="filter-btn active px-3.5 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap bg-okinawa-600 text-white shadow-md">
+            全部行程
+          </button>
+          <button data-filter="food" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap bg-white dark:bg-slate-800 hover:bg-okinawa-50 dark:hover:bg-slate-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-slate-700">
+            🍖 美食
+          </button>
+          <button data-filter="scenic" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap bg-white dark:bg-slate-800 hover:bg-okinawa-50 dark:hover:bg-slate-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-slate-700">
+            📸 景點
+          </button>
+          <button data-filter="shopping" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap bg-white dark:bg-slate-800 hover:bg-okinawa-50 dark:hover:bg-slate-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-slate-700">
+            🛍️ 購物
+          </button>
+          <button data-filter="activity" class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all whitespace-nowrap bg-white dark:bg-slate-800 hover:bg-okinawa-50 dark:hover:bg-slate-700 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-slate-700">
+            🤿 活動
+          </button>
         </div>
-        <h3>路易威登沖繩店</h3>
-        <p class="spot-note">那霸市Omoromachi 4-1 T Galleria, 〒900-0006</p>
-        <div class="comment-box">
-          <div style="display:flex; flex-wrap:wrap; gap:4px 16px; margin-bottom:6px;">
-            <span>📞 <a href="tel:0120594119" style="color:var(--primary);">0120-59-4119</a></span>
-            <span>⏰ 10:00～20:00（每日）</span>
-          </div>
-          <div style="background:var(--surface-2); padding:8px 12px; border-radius:10px; font-size:0.85rem;">
-            <strong>🔹 預約方式</strong>：僅提供店內預約<br>
-            <span style="color:var(--muted);">📅 已預約時間：？？？</span>
-          </div>
-          <div style="margin-top:8px; font-size:0.82rem; color:var(--muted);">
-            🅿️ 停車：T Galleria 附設停車場（購物可折抵）
-          </div>
+
+        <!-- 摺疊操作 -->
+        <div class="flex gap-2 justify-end">
+          <button id="expandAllBtn" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 transition">
+            展開全部
+          </button>
+          <button id="collapseAllBtn" class="px-3 py-1.5 text-xs font-bold rounded-lg bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 transition">
+            收合全部
+          </button>
         </div>
       </div>
-
-      <!-- Day 1 國際通周邊停車 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">Day 1</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%9C%8B%E9%9A%9B%E9%80%9A+%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0" target="_blank">🗺️ 周邊停車</a>
-          </div>
-        </div>
-        <h3>國際通周邊停車</h3>
-        <p class="parking-detail">
-          <span class="parking-tag paid">收費</span>
-          <strong>琉貿百貨停車場</strong> 〒900-0015 那覇市久茂地1-1-1
-        </p>
-        <p class="parking-detail">
-          <span class="parking-tag paid">收費</span>
-          <strong>國際通沿線 Coin Parking</strong> 多處，約 200～300 円/小時
-        </p>
-      </div>
-
-      <!-- Day 2 景點停車 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">Day 2</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%80%A8%E9%95%B7%E5%B3%B6+%E3%82%A6%E3%83%9F%E3%82%AB%E3%82%B8%E3%83%86%E3%83%A9%E3%82%B9+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 瀨長島</a>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%82%B7%E3%83%93%E3%83%8A%E3%82%A2%E3%82%A6%E3%83%88%E3%83%AC%E3%83%83%E3%83%88+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank">🗺️ Outlet</a>
-          </div>
-        </div>
-        <h3>Day 2 停車資訊</h3>
-        <p class="parking-detail">
-          <span class="parking-tag free">免費</span>
-          <strong>瀨長島 Umikaji Terrace</strong> 專用停車場<br>
-          〒901-0233 豊見城市瀬長174-6
-        </p>
-        <p class="parking-detail">
-          <span class="parking-tag free">免費</span>
-          <strong>Outlet Mall Ashibinaa</strong> 平面／立體停車場<br>
-          〒901-0225 豊見城市豊崎1-188
-        </p>
-      </div>
-
-            <!-- Day 3 景點停車 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">Day 3</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://maps.app.goo.gl/YutoR63ED4z5uUzA8" target="_blank">🗺️ 恩納藍洞集合點</a>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%87%E5%BA%A7%E6%AF%9B+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 萬座毛</a>
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%B2%96%E7%B8%84%E3%83%A9%E3%82%A4%E3%82%AB%E3%83%A0+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ AEON</a>
-          </div>
-        </div>
-        <h3>Day 3 停車資訊</h3>
-        <p class="parking-detail">
-          <span class="parking-tag free">免費</span>
-          <strong>恩納藍洞潛水集合點（前兼久漁港）</strong> 港口內免費停車場（無需預約）<br>
-          〒904-0414 沖縄県国頭郡恩納村前兼久114-1<br>
-          <span style="font-size:0.75rem; color:var(--muted);">集合地點在漁港港口，活動結束後回店沖身及更衣。</span>
-        </p>
-        <p class="parking-detail">
-          <span class="parking-tag free">免費</span>
-          <strong>萬座毛</strong> 展望台停車場<br>
-          〒904-0411 国頭郡恩納村恩納2768<br>
-          <span style="font-size:0.75rem; color:var(--muted);">Map Code: 206 312 039*17 ｜ 觀賞象鼻岩海景</span>
-        </p>
-        <p class="parking-detail">
-          <span class="parking-tag free">免費</span>
-          <strong>AEON MALL Rycom</strong> 屋頂／平面，可停 3,000 台以上<br>
-          〒901-2300 中頭郡北中城村泡瀬
-        </p>
-      </div>
-
-      <!-- Day 4 景點停車 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">Day 4</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E3%81%97%E3%81%84%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 水族館</a>
-  <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E3%82%BF%E3%83%AF%E3%83%BC+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 海洋塔</a>
-  <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E5%BD%A2%E5%B2%A9+%E5%8F%A4%E5%AE%87%E5%88%A9%E5%B3%B6+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 心形岩</a>
-  <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=ChuraSun6+Okinawa+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ ChuraSun6</a>
-</div>
-        </div>
-        <h3>Day 4 停車資訊</h3>
-        <p class="parking-detail">
-          <span class="parking-tag free">免費</span>
-          <strong>美麗海水族館</strong> 第1～第5停車場<br>
-          〒905-0206 国頭郡本部町石川424<br>
-          <span style="font-size:0.75rem; color:var(--muted);">建議停第3停車場，離入口最近</span>
-        </p>
-        <p class="parking-detail">
-          <span class="parking-tag free">免費</span>
-          <strong>古宇利海洋塔</strong> 塔下專用停車場<br>
-          〒905-0406 国頭郡今帰仁村古宇利538
-        </p>
-        <p class="parking-detail">
-          <span class="parking-tag paid">收費</span>
-          <strong>心形岩</strong> 臨時停車場，約 200～300 円/次<br>
-          〒905-0406 国頭郡今帰仁村古宇利
-        </p>
-        <p class="parking-detail">
-          <span class="parking-tag paid">收費</span>
-          <strong>ChuraSun6 沖繩（夜店）</strong> 附近收費停車場<br>
-          〒900-0032 那覇市松山1-5-1[reference:3][reference:4]<br>
-          <span style="font-size:0.75rem; color:var(--muted);">建議搭計程車前往，或使用附近 Coin Parking</span>
-        </p>
-      </div>
-
-      <!-- Day 5 景點停車 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">Day 5</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%9D%A5%E9%99%A2+%E9%81%94%E6%91%A9%E5%AF%BA+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 達摩寺</a>
-          </div>
-        </div>
-        <h3>Day 5 停車資訊</h3>
-        <p class="parking-detail">
-          <span class="parking-tag free">免費</span>
-          <strong>西來院達摩寺</strong> 境內停車（車位極少）<br>
-          〒903-0815 那覇市首里赤田町1-5-1<br>
-          <span style="font-size:0.75rem; color:var(--muted);">建議 08:30 前到，或停放附近收費停車場</span>
-        </p>
-        <p class="parking-detail">
-          <span class="parking-tag paid">收費</span>
-          <strong>Oki Blues 還車</strong> 租車公司附設停車場<br>
-          〒900-0021 那覇市泉崎1-11-1<br>
-          <span style="font-size:0.75rem; color:var(--muted);">⛽ 還車前記得加滿油</span>
-        </p>
-      </div>
-
     </div>
-  </div>
-  <!-- ===== 泊車資訊區塊結束 ===== -->
 
-  <!-- ========================= DAY 1 ========================= -->
-  <div class="day-section">
-    <div class="day-header" data-day="1">
-      <span>📅 Day 1｜15/7/2026 (三) 那霸市區(國際通)</span>
-      <span class="toggle-icon">▼</span>
-    </div>
-    <div class="day-content collapsed" id="dayContent1">
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">08:00</span>
-          <div class="btn-group">
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E9%A6%99%E6%B8%AF%E5%9B%BD%E9%9A%9B%E7%A9%BA%E6%B8%AF/" target="_blank">📸 #香港国際空港</a>
-          </div>
-        </div>
-        <h3>✈️ 香港機場集合</h3>
-        <div class="comment-box">✅ 記得帶護照、日文譯本、租車訂單</div>
-      </div>
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">13:40</span>
-          <div class="btn-group">
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF/" target="_blank">📸 #那覇空港</a>
-          </div>
-        </div>
-        <h3>🛬 那霸機場抵達</h3>
-        <div class="comment-box">Lily, Jeffery, Alex 先到，等 Carman & Anthony</div>
-      </div>
-      
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">14:00</span>
-          <div class="btn-group">
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E6%B2%96%E7%B8%84%E3%81%BE%E3%81%84%E3%81%A9%E3%81%93%E3%81%86/" target="_blank">📸 #沖縄まいどこう</a>
-          </div>
-        </div>
-        <h3>🍙 機場or 酒店附近輕食</h3>
-        <div class="comment-box">簡單飯糰或沖繩麵，等齊人</div>
-      </div>
-      
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">15:45</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Tissage+Hotel+Naha" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%83%86%E3%82%A3%E3%82%B5%E3%83%BC%E3%82%B8%E3%83%9B%E3%83%86%E3%83%AB%E9%82%A3%E8%A6%87/" target="_blank">📸 #ティサージホテル那覇</a>
-          </div>
-        </div>
-        <h3>🏨 Tissage Hotel Naha ティサージホテル那覇</h3>
-        <p class="spot-note">〒900-0036 沖縄県那覇市西2-14-1</p>
-        <div class="comment-box">
-          <strong>📌 Check-in 15:00 ｜ Check-out 11:00</strong><br>
-          放行李，稍作休息。
-        </div>
-      </div>
-      
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">16:00</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E9%A7%BF%E6%B2%B3%E5%B1%8B+%E9%82%A3%E8%A6%87%E6%B2%96%E6%98%A0%E9%80%9A%E5%BA%97" target="_blank" rel="noopener noreferrer">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E9%A7%BF%E6%B2%B3%E5%B1%8B/" target="_blank" rel="noopener noreferrer">📸 #駿河屋</a>
-          </div>
-        </div>
-        <h3>駿河屋 那霸沖映通店</h3>
-        <p class="spot-note">中古玩具朝聖，位於 D-naha B1。</p>
-        <div class="comment-box">
-          <div class="comment-title">同行備註</div>
-          <ul>
-            <li>Lily jeffery 同 alex，求其搵啲嘢食先。</li>
-            <li>等埋 Carman、Anthony 一齊陪同 Alex 中古玩具朝聖。</li>
-            <li>Alex 要買模型同埋睇玩具喎。</li>
-            <li>Carman join 埋一齊去國際通逛街。</li>
+      <!-- 左側/桌面版固定側欄：大綱與快捷鍵 -->
+      <nav class="hidden lg:block lg:col-span-3 sticky top-24 space-y-3">
+        <div class="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md rounded-3xl p-5 border border-white/20 dark:border-slate-800 shadow-premium dark:shadow-premium-dark">
+          <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">📍 快速導航大綱</h3>
+          <ul class="space-y-1" id="desktopNav">
+            <li>
+              <a href="#section-parking" class="nav-item flex items-center justify-between p-2.5 rounded-xl text-sm font-semibold hover:bg-okinawa-50 dark:hover:bg-slate-800 transition text-okinawa-600 dark:text-okinawa-400">
+                <span>🚗 泊車與精品資訊</span>
+                <span class="text-xs px-1.5 py-0.5 rounded bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300 font-bold">INFO</span>
+              </a>
+            </li>
+            <li>
+              <a href="#section-1" class="nav-item flex items-center justify-between p-2.5 rounded-xl text-sm font-semibold hover:bg-[#eaeaea]/30 dark:hover:bg-slate-800/50 transition">
+                <span>📅 Day 1 - 那霸市區</span>
+                <span class="text-xs text-gray-400 font-normal">15/7</span>
+              </a>
+            </li>
+            <li>
+              <a href="#section-2" class="nav-item flex items-center justify-between p-2.5 rounded-xl text-sm font-semibold hover:bg-[#eaeaea]/30 dark:hover:bg-slate-800/50 transition">
+                <span>📅 Day 2 - 租車/瀨長島</span>
+                <span class="text-xs text-gray-400 font-normal">16/7</span>
+              </a>
+            </li>
+            <li>
+              <a href="#section-3" class="nav-item flex items-center justify-between p-2.5 rounded-xl text-sm font-semibold hover:bg-[#eaeaea]/30 dark:hover:bg-slate-800/50 transition">
+                <span>📅 Day 3 - 避暑與冒險</span>
+                <span class="text-xs text-gray-400 font-normal">17/7</span>
+              </a>
+            </li>
+            <li>
+              <a href="#section-4" class="nav-item flex items-center justify-between p-2.5 rounded-xl text-sm font-semibold hover:bg-[#eaeaea]/30 dark:hover:bg-slate-800/50 transition">
+                <span>📅 Day 4 - 水族館/古宇利島</span>
+                <span class="text-xs text-gray-400 font-normal">18/7</span>
+              </a>
+            </li>
+            <li>
+              <a href="#section-5" class="nav-item flex items-center justify-between p-2.5 rounded-xl text-sm font-semibold hover:bg-[#eaeaea]/30 dark:hover:bg-slate-800/50 transition">
+                <span>📅 Day 5 - 達摩寺/歸程</span>
+                <span class="text-xs text-gray-400 font-normal">19/7</span>
+              </a>
+            </li>
           </ul>
         </div>
-      </div>
-      
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">17:30</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%9C%8B%E9%9A%9B%E9%80%9A+%E9%A6%96%E9%87%8C" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A/" target="_blank">📸 #国際通り</a>
+      </nav>
+
+      <!-- 右側主要內容區 -->
+      <div class="lg:col-span-9 space-y-8" id="itineraryContent">
+
+        <!-- ============================================================ -->
+        <!-- 🚗 泊車資訊（折疊區塊） -->
+        <!-- ============================================================ -->
+        <section id="section-parking" class="scroll-mt-24">
+          <div class="day-section">
+            <div class="day-header" data-day="parking">
+              <span>🚗 泊車資訊（點我展開／收合）</span>
+              <span class="toggle-icon">▶</span>
+            </div>
+            <div class="day-content collapsed p-4 md:p-6 space-y-4" id="dayContentparking">
+
+              <!-- 路易威登沖繩店 -->
+              <div class="spot-card">
+                <div class="spot-top">
+                  <span class="time-badge">🛍️ 精品</span>
+                  <div class="btn-group">
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Louis+Vuitton+Okinawa+T+Galleria" target="_blank">🗺️ 導航</a>
+                    <a class="ig-btn" href="https://www.instagram.com/explore/tags/louisvuittonokinawa/" target="_blank">📸 #louisvuittonokinawa</a>
+                  </div>
+                </div>
+                <h3 class="text-lg font-bold">路易威登沖繩店</h3>
+                <p class="spot-note text-xs text-gray-400">那霸市Omoromachi 4-1 T Galleria, 〒900-0006</p>
+                <div class="meta-box">
+                  <div class="meta-header">
+                    <span>📞 <a href="tel:0120594119" class="text-okinawa-600 dark:text-okinawa-400 font-bold">0120-59-4119</a></span>
+                    <span>⏰ 10:00～20:00（每日）</span>
+                  </div>
+                  <div class="bg-white/60 dark:bg-slate-950/40 p-3 rounded-xl text-xs space-y-1">
+                    <p>• <strong>預約方式</strong>：僅提供店內預約</p>
+                    <p class="text-gray-400 dark:text-gray-500">📅 已預約時間：？？？</p>
+                  </div>
+                  <div class="mt-2 text-[11px] text-gray-400 dark:text-gray-500">
+                    🅿️ 停車：T Galleria 附設停車場（購物可折抵）
+                  </div>
+                </div>
+              </div>
+
+              <!-- Day 1 國際通周邊停車 -->
+              <div class="spot-card">
+                <div class="spot-top">
+                  <span class="time-badge">Day 1</span>
+                  <div class="btn-group">
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%9C%8B%E9%9A%9B%E9%80%9A+%E3%83%91%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0" target="_blank">🗺️ 周邊停車</a>
+                  </div>
+                </div>
+                <h3 class="text-lg font-bold">國際通周邊停車</h3>
+                <div class="meta-box">
+                  <div class="meta-header">
+                    <span>🚗 交通：自駕約 15 分鐘（至那霸）</span>
+                    <span>⏱️ 停留：視購物時間而定</span>
+                  </div>
+                  <p class="parking-detail">
+                    <span class="parking-tag paid">收費</span>
+                    <strong>琉貿百貨停車場</strong> 〒900-0015 那覇市久茂地1-1-1
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag paid">收費</span>
+                    <strong>國際通沿線 Coin Parking</strong> 多處，約 200～300 円/小時
+                  </p>
+                </div>
+              </div>
+
+              <!-- Day 2 景點停車 -->
+              <div class="spot-card">
+                <div class="spot-top">
+                  <span class="time-badge">Day 2</span>
+                  <div class="btn-group">
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%80%A8%E9%95%B7%E5%B3%B6+%E3%82%A6%E3%83%9F%E3%82%AB%E3%82%B8%E3%83%86%E3%83%A9%E3%82%B9+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 瀨長島</a>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A2%E3%82%B7%E3%83%93%E3%83%8A%E3%82%A2%E3%82%A6%E3%83%88%E3%83%AC%E3%83%83%E3%83%88+%E9%A7%90%E8%BB%8A%E5%A0%B4" target="_blank">🗺️ Outlet</a>
+                  </div>
+                </div>
+                <h3 class="text-lg font-bold">Day 2 停車資訊</h3>
+                <div class="meta-box">
+                  <div class="meta-header">
+                    <span>🚗 交通：自駕約 10～15 分鐘</span>
+                    <span>⏱️ 停留：無限時間</span>
+                  </div>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>瀨長島 Umikaji Terrace</strong> 專用停車場<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒901-0233 豊見城市瀬長174-6</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>Outlet Mall Ashibinaa</strong> 平面／立體停車場<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒901-0225 豊見城市豊崎1-188</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Day 3 景點停車 -->
+              <div class="spot-card">
+                <div class="spot-top">
+                  <span class="time-badge">Day 3</span>
+                  <div class="btn-group">
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E6%AE%9B%E6%B3%A2%E5%B2%AC%E7%85%AC%E5%A1%94" target="_blank">🗺️ 殘波岬</a>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Forest+Adventure+Okinawa" target="_blank">🗺️ Forest Adv</a>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E9%83%A8%E7%80%AC%E5%90%8D%E6%B5%B7%E6%B4%8B%E5%85%AC%E5%9C%92" target="_blank">🗺️ 海洋公園</a>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%B2%96%E7%B8%84%E3%83%A9%E3%82%A4%E3%82%AB%E3%83%A0+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ AEON</a>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E6%BF%B8%E7%BE%8E%E5%9C%8B%E6%9D%91" target="_blank">🗺️ 美國村</a>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Round+One+Stadium+Ginowan" target="_blank">🗺️ Round One</a>
+                  </div>
+                </div>
+                <h3 class="text-lg font-bold">Day 3 停車資訊</h3>
+                <div class="meta-box">
+                  <div class="meta-header">
+                    <span>🚗 交通：自駕行程全覆蓋</span>
+                    <span>⏱️ 停留：各景點獨立計</span>
+                  </div>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>殘波岬觀光停車場</strong> 燈塔周邊免費停放<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒904-0328 沖縄県中頭郡読谷村宇座1861</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>Forest Adventure 專用停車場</strong> 冒險公園入口處<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒904-0417 沖縄県国頭郡恩納村真栄田1525</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>部瀨名海洋公園遊客停車場</strong> 園區附設大型免費車位<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒905-0026 沖縄県名護市喜瀬1744-1</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>AEON MALL Rycom 停車場</strong> 屋頂及平面大型免費停車場<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒901-2300 中頭郡北中城村泡瀬</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>美濱美國村公共免費停車場</strong> Depot Island 附近大型車位充足<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒904-0115 沖縄県中頭郡北谷町美浜</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>Round One 宜野灣店專屬停車場</strong> 深夜遊玩提供免費停放<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒901-2224 沖縄県宜野湾市真志喜4-2-1</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Day 4 景點停車 -->
+              <div class="spot-card">
+                <div class="spot-top">
+                  <span class="time-badge">Day 4</span>
+                  <div class="btn-group">
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E3%81%97%E3%81%84%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 水族館</a>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E3%82%BF%E3%83%AF%E3%83%BC+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 海洋塔</a>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E5%BD%A2%E5%B2%A9+%E5%8F%A4%E5%AE%87%E5%88%A9%E5%B3%B6+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 心形岩</a>
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=ChuraSun6+Okinawa+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ ChuraSun6</a>
+                  </div>
+                </div>
+                <h3 class="text-lg font-bold">Day 4 停車資訊</h3>
+                <div class="meta-box">
+                  <div class="meta-header">
+                    <span>🚗 交通：自駕長途北部行</span>
+                    <span>⏱️ 停留：各景點獨立計</span>
+                  </div>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>美麗海水族館</strong> 第1～第5停車場<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒905-0206 国頭郡本部町石川424（建議停第3停車場，離入口最近）</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>古宇利海洋塔</strong> 塔下專用停車場<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒905-0406 国頭郡今帰仁村古宇利538</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag paid">收費</span>
+                    <strong>心形岩</strong> 臨時停車場，約 200～300 円/次<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒905-0406 国頭郡今帰仁村古宇利</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag paid">收費</span>
+                    <strong>ChuraSun6 沖繩（夜店）</strong> 附近收費停車場<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒900-0032 那覇市松山1-5-1 | 建議搭計程車前往，或使用附近 Coin Parking</span>
+                  </p>
+                </div>
+              </div>
+
+              <!-- Day 5 景點停車 -->
+              <div class="spot-card">
+                <div class="spot-top">
+                  <span class="time-badge">Day 5</span>
+                  <div class="btn-group">
+                    <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%9D%A5%E9%99%A2+%E9%81%94%E6%91%A9%E5%AF%BA+%E9%A7%90%E8%BB%8A" target="_blank">🗺️ 達摩寺</a>
+                  </div>
+                </div>
+                <h3 class="text-lg font-bold">Day 5 停車資訊</h3>
+                <div class="meta-box">
+                  <div class="meta-header">
+                    <span>🚗 交通：還車與首里自駕</span>
+                    <span>⏱️ 停留：30分鐘～1小時</span>
+                  </div>
+                  <p class="parking-detail">
+                    <span class="parking-tag free">免費</span>
+                    <strong>西來院達摩寺</strong> 境內停車（車位極少）<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒903-0815 那覇市首里赤田町1-5-1 | 建議 08:30 前到，或停放附近收費停車場</span>
+                  </p>
+                  <p class="parking-detail">
+                    <span class="parking-tag paid">收費</span>
+                    <strong>Oki Blues 還車</strong> 租車公司附設停車場<br>
+                    <span class="text-gray-400 dark:text-gray-500">〒900-0021 那覇市泉崎1-11-1 | ⛽ 還車前記得加滿油</span>
+                  </p>
+                </div>
+              </div>
+
+            </div>
           </div>
-        </div>
-        <h3>🛍️ 國際通商店街＋牧志公設市場</h3>
-        <div class="comment-box">⭐ 重點：第一牧志公設市場（魚市場）晚餐，新鮮海鮮代客料理。<br>Alex 可逛玩具店，Carmen 喜歡的雜貨應有盡有。<br>晚上悠閒散步，不用長途駕駛。</div>
-      </div>
-      
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">19:30</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%AC%AC%E4%B8%80%E7%89%A7%E5%BF%97%E5%85%AC%E8%A8%AD%E5%B8%82%E5%A0%B4" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E7%89%A7%E5%BF%97%E5%85%AC%E8%A8%AD%E5%B8%82%E5%A0%B4/" target="_blank">📸 #牧志公設市場</a>
+        </section>
+        <!-- ===== 泊車資訊區塊結束 ===== -->
+
+
+        <!-- ========================= DAY 1 ========================= -->
+        <section id="section-1" class="scroll-mt-24 space-y-4">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-lg font-black bg-okinawa-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">1</span>
+            <div>
+              <h2 class="text-xl font-bold">15/7/2026 (三) 那霸市區「國際通潮逛熱身」</h2>
+              <p class="text-xs text-gray-400">不需長途自駕的一天，悠閒熟悉沖繩氛圍</p>
+            </div>
           </div>
-        </div>
-        <h3>🐟 第一牧志公設市場晚餐</h3>
-        <div class="comment-box">必吃：夜光貝、海膽、龍蝦。二樓可代客料理，氣氛熱鬧。</div>
+
+          <!-- 景點：香港機場集合 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">08:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer group">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200 transition">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold flex items-center gap-2">🛫 香港國際機場集合</h3>
+                  <p class="text-xs text-gray-400">大隊集體出發，未出發先興奮！</p>
+                </div>
+                <a href="https://www.instagram.com/explore/tags/香港国際空港/" target="_blank" class="ig-btn">📸 #香港國際機場</a>
+              </div>
+              
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：往機場（自理）</span>
+                  <span>⏱️ 停留/活動: 1.5 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 行前最後確認：所有人護照 (效期6個月以上)、駕照原件、日文翻譯譯本、租車預約確認單。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：那霸機場抵達 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">13:40</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold flex items-center gap-2">🛬 那霸機場 (OKA) 降落</h3>
+                  <p class="text-xs text-gray-400">正式踏上沖繩土地！</p>
+                </div>
+                <a href="https://www.instagram.com/explore/tags/那覇空港/" target="_blank" class="ig-btn">📸 #那覇空港</a>
+              </div>
+              
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：飛機航程約 3.5 小時</span>
+                  <span>⏱️ 停留/活動：20 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> Lily、Jeffery、Alex 第一班機抵達，先在入境大廳稍作等候，等 Carman & Anthony 降落後全員會合！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：輕食 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="food">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">14:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🍙 機場或酒店附近輕食小憩</h3>
+                <a href="https://www.instagram.com/explore/tags/沖縄まいどこう/" target="_blank" class="ig-btn">📸 #沖縄まいどこう</a>
+              </div>
+
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：步行約 5-10 分鐘</span>
+                  <span>⏱️ 停留/活動：45 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 簡單飯糰或沖繩麵，肚子先墊底，等齊人手。強力推薦超高人氣「豬肉蛋飯糰 (Onigiri Breakfast)」。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：酒店 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">15:45</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold">🏨 Tissage Hotel Naha</h3>
+                  <p class="text-xs text-gray-400">〒900-0036 沖縄県那覇市西2-14-1</p>
+                </div>
+                <div class="flex gap-1.5">
+                  <a href="https://www.google.com/maps/search/?api=1&query=Tissage+Hotel+Naha" target="_blank" class="map-btn">🗺️ 導航</a>
+                </div>
+              </div>
+              
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：輕軌或計程車約 15 分鐘</span>
+                  <span>⏱️ 停留/活動：30 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> Check-in 15:00 後 ｜ Check-out 11:00 前。大堂卸下沉重行囊，喝杯水，準備出戰！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：駿河屋 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="shopping">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">16:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold flex items-center gap-1.5">🧸 駿河屋 那霸沖映通店</h3>
+                  <p class="text-xs text-gray-400">位於 D-naha 百貨 B1</p>
+                </div>
+                <div class="flex gap-1.5">
+                  <a href="https://www.google.com/maps/search/?api=1&query=%E9%A7%BF%E6%B2%B3%E5%B1%8B+%E9%82%A3%E8%A6%87%E6%B2%96%E6%98%A0%E9%80%9A%E5%BA%97" target="_blank" class="map-btn">🗺️ 導航</a>
+                  <a href="https://www.instagram.com/explore/tags/駿河屋/" target="_blank" class="ig-btn">📸 #駿河屋</a>
+                </div>
+              </div>
+              
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：步行約 10 分鐘</span>
+                  <span>⏱️ 停留/活動：1.5 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> Alex模型朝聖與中古玩具尋寶，Carman也可以在這裡逛文青雜貨！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：國際通＋晚餐 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="shopping">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">17:30 – 19:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold">🛍️ 國際通商店街 & 牧志公設市場</h3>
+                  <p class="text-xs text-gray-400">沖繩最繁華的奇蹟一英里</p>
+                </div>
+                <div class="flex gap-1.5">
+                  <a href="https://www.google.com/maps/search/?api=1&query=%E5%9C%8B%E9%9A%9B%E9%80%9A+%E9%A6%96%E9%87%8C" target="_blank" class="map-btn">🗺️ 導航</a>
+                  <a href="https://www.instagram.com/explore/tags/国際通り/" target="_blank" class="ig-btn">📸 #国際通り</a>
+                </div>
+              </div>
+              
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：步行即達</span>
+                  <span>⏱️ 停留/活動：2 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 重點前往「第一牧志公設市場」享用晚餐。1樓挑選海鮮（夜光貝、海膽、龍蝦），2樓代客料理，鑊氣十足！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：夜間居酒屋 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="food">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">19:30 – 22:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🌃 國際通屋台村 & 夜間小酌</h3>
+                <a href="https://www.instagram.com/explore/tags/国際通りナイト/" target="_blank" class="ig-btn">📸 #国際通りナイト</a>
+              </div>
+
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：步行</span>
+                  <span>⏱️ 停留/活動：2.5 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 晚餐後繼續在國際通周邊散步，可前往「屋台村」體驗沖繩路邊攤風情，或找一間有音樂氣氛的居酒屋小酌。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ✨ AI 方案按鈕 -->
+          <div class="flex justify-end pt-2">
+            <button onclick="generateDayPlan(1)" class="day-ai-btn px-4 py-2.5 rounded-2xl bg-gradient-to-r from-okinawa-600 to-sky-500 text-white font-bold text-xs shadow-md hover:opacity-90 transition flex items-center gap-1.5">
+              <span>✨ 生成今日 AI 備案與美食推薦</span>
+            </button>
+          </div>
+          <!-- 該日 AI 渲染容器 -->
+          <div id="aiPlan-1" class="hidden mt-3 p-4 bg-sky-50/50 dark:bg-sky-950/20 border border-sky-100 dark:border-sky-900/30 rounded-2xl text-xs leading-relaxed space-y-2"></div>
+        </section>
+
+        <!-- ========================= DAY 2 ========================= -->
+        <section id="section-2" class="scroll-mt-24 space-y-4">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-lg font-black bg-okinawa-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">2</span>
+            <div>
+              <h2 class="text-xl font-bold">16/7/2026 (四) 「取車・夢幻水族館與瀨長島絕美日落」</h2>
+              <p class="text-xs text-gray-400">喜迎大佬歸隊，全員烤肉大慶典</p>
+            </div>
+          </div>
+
+          <!-- 景點：早餐 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="food">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">09:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">☀️ 享用那霸能量早餐</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：步行約 5 分鐘</span>
+                  <span>⏱️ 停留/活動：1 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 推薦享用「C&C Breakfast」或附近手作熱壓吐司，喚醒美好的一天。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：取車 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">10:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold">🚗 Oki Blues 租車公司</h3>
+                  <p class="text-xs text-gray-400">那霸市西區</p>
+                </div>
+                <a href="https://maps.app.goo.gl/DgbbpwwD2Gtg8ZRz6" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：計程車約 10 分鐘</span>
+                  <span>⏱️ 停留/活動：30 分鐘</span>
+                </div>
+                <p>• <strong>車型規格：</strong>Toyota Vellfire 20系 | 安心全險 | 4天 56,000円。取車時務必仔細錄影車身檢查外觀。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：DMM水族館 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">10:45</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🐠 DMM Kariyushi 水族館</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=DMM+Kariyushi+Aquarium+Okinawa" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：自駕約 15 分鐘</span>
+                  <span>⏱️ 停留/活動：2 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 11:00 有可愛水獺觸摸與餵食體驗！還有巨大的玻璃地板水槽，室內冷氣充足適合正午避暑。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：Outlet -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="shopping">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">13:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🛍️ Okinawa Outlet Mall Ashibinaa</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=Okinawa+Outlet+Mall+Ashibinaa" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：自駕約 5 分鐘</span>
+                  <span>⏱️ 停留/活動：2.5 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 各大日系服飾、運動大牌應有盡有，折扣極高！出發前可先於周邊吃點沖繩麵墊墊肚子。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：瀨長島 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">16:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🌅 瀨長島 Umikaji Terrace</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=%E7%80%A8%E9%95%B7%E5%B3%B6+Umikaji+Terrace" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box text-rose-800 dark:text-rose-300 border-coral-500 bg-coral-500/5">
+                <div class="meta-header text-coral-600 dark:text-coral-400">
+                  <span>🚗 交通：自駕約 10 分鐘</span>
+                  <span>⏱️ 停留/活動：2 小時</span>
+                </div>
+                <p>• <strong>🔥 重要接人任務：</strong> Jeffery 大約於 18:00 需獨自開車前往機場接「大佬」！</p>
+                <p class="mt-1 font-medium">其他組員留在瀨長島散步拍照、品嚐熱門「幸福鬆餅」，看完夕陽後自行搭乘計程車回飯店與大部隊會合。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：晚餐 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="food">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">19:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🥩 全員到齊・極上和牛燒肉晚餐</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：自駕/計程車約 20 分鐘</span>
+                  <span>⏱️ 停留/活動：2 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 推薦「琉球の牛」或「八重山石垣牛 匠」，頂級石垣牛烤網上滋滋作響，來一杯生啤酒乾杯歡慶大佬歸隊！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ✨ AI 方案按鈕 -->
+          <div class="flex justify-end pt-2">
+            <button onclick="generateDayPlan(2)" class="day-ai-btn px-4 py-2.5 rounded-2xl bg-gradient-to-r from-okinawa-600 to-sky-500 text-white font-bold text-xs shadow-md hover:opacity-90 transition flex items-center gap-1.5">
+              <span>✨ 生成今日 AI 備案與美食推薦</span>
+            </button>
+          </div>
+          <div id="aiPlan-2" class="hidden mt-3 p-4 bg-sky-50/50 dark:bg-sky-950/20 border border-sky-100 dark:border-sky-900/30 rounded-2xl text-xs leading-relaxed space-y-2"></div>
+        </section>
+
+        <!-- ========================= DAY 3 ========================= -->
+        <section id="section-3" class="scroll-mt-24 space-y-4">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-lg font-black bg-okinawa-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">3</span>
+            <div>
+              <h2 class="text-xl font-bold">17/7/2026 (五) 「殘波高塔・叢林攀爬・海洋展望塔與美國村璀璨落日」</h2>
+              <p class="text-xs text-gray-400">早出發避暑黃金線，購物娛樂全天大滿貫</p>
+            </div>
+          </div>
+
+          <!-- 08:30 酒店出發 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">08:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚗 酒店出發</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 提早出門以避開最炎熱時段。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 08:30 – 09:15 前往殘波岬燈塔 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">08:30 – 09:15</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚗 前往殘波岬燈塔</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：約 45 分鐘</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 車上有舒適冷氣吹拂，沿途觀看沖繩西海岸景緻。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 09:15 – 09:35 殘波岬燈塔 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">09:15 – 09:35</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🗼 殘波岬燈塔</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=%E6%AE%9B%E6%B3%A2%E5%B2%AC%E7%85%AC%E5%A1%94" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：20 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 絕美岬灣，但現場無遮蔭物，拍完明信片風格合照後即刻上車！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 09:35 – 09:45 前往 Forest Adventure -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">09:35 – 09:45</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚗 前往 Forest Adventure</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：約 10 分鐘</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 短途駕駛。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 09:45 – 09:50 Forest Adventure 報到 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="activity">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">09:45 – 09:50</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">📝 Forest Adventure 報到</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：5 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> ✅ 預約 10:00 場次，須提早 10 分鐘報到。在更衣和報到之餘記得先去趟廁所！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10:00 – 12:00 Forest Adventure 探險 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="activity">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">10:00 – 12:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🌳 Forest Adventure 森林網攀繩索</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=Forest+Adventure+Okinawa" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：2 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 高空滑索和森林攀爬！森林內設有充足的自然樹蔭，玩起來格外清爽不炎熱。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12:00 – 12:10 前往餐廳 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">12:00 – 12:10</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚗 前往午餐餐廳</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：約 10 分鐘</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 準備大快朵頤，為體力大補血！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12:10 – 13:00 🍽️ 午餐（恩納村） -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="food">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">12:10 – 13:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🍽️ 恩納村餐廳午餐</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：50 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 在設有強效冷氣的餐廳內吹吹風、舒服吃頓中飯。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13:00 – 13:20 前往部瀨名海洋公園 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">13:00 – 13:20</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚗 前往部瀨名海洋公園</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：約 20 分鐘</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 沿名護海岸行駛。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13:20 – 13:25 停車、步行 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">13:20 – 13:25</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚶 停車並步行前往玻璃底船碼頭</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：5 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 快速從停車場走向岸邊乘船點。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13:30 🚤 搭乘玻璃底船 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="activity">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">13:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚤 搭乘玻璃底遊艇</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：20 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 船底是透明大玻璃，可清晰欣賞魚群和珊瑚。船頂設有遮陽篷，遮陽涼爽【官方資訊】。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13:50 下船 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">13:50</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚶 玻璃底船下船並前往海中展望塔</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 準備深入海底。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13:50 – 14:20 參觀海中展望塔 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">13:50 – 14:20</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🗼 海中展望塔</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=%E9%83%A8%E7%80%AC%E5%90%8D%E6%B5%B7%E6%B4%8B%E5%85%AC%E5%9C%92" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：30 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 沿著螺旋梯深入海平面下 5 米，透過 24 個觀看孔觀察原始海底魚群。✅ **重點：室內配有強效冷氣，超冰涼解暑！【官方資訊】**</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 14:20 – 14:25 步行回停車場 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">14:20 – 14:25</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚶 步行回車場</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：5 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 裝備齊全，出發買買買！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 14:25 – 15:05 前往 AEON Mall -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">14:25 – 15:05</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚗 前往 AEON Mall Okinawa Rycom</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：約 40 分鐘</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 導航 Mapcode: 33 530 406*45</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 15:05 – 17:35 🛍️ AEON Mall Okinawa Rycom -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="shopping">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">15:05 – 17:35</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🛍️ AEON MALL Okinawa Rycom 旗艦來客夢</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%B2%96%E7%B8%84%E3%83%A9%E3%82%A4%E3%82%AB%E3%83%A0" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：2.5 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 在寬大且冷氣強效的巨型商場內散步，血拼大牌服飾，或是去 BIC CAMERA 購入日本免稅家電與美妝。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 17:35 – 17:50 前往美國村 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">17:35 – 17:50</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚗 前往美濱美國村</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：約 15 分鐘</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> GPS導航設定為「美濱美國村」。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 17:50 – 20:50 🇺🇸 美國村（夕陽＋晚餐） -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">17:50 – 20:50</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🇺🇸 美濱美國村浪漫落日與晚餐</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E6%BF%B8%E7%BE%8E%E5%9C%8B%E6%9D%91" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：3 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 在日落沙灘靜靜觀賞黃金海平線夕陽，漫步 Depot Island 特色街區。晚餐推薦在美國村預約「琉球の牛 美濱店」或超人氣「迴轉壽司市場」！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 20:50 – 21:00 前往 Round One -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">20:50 – 21:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚗 前往 Round One 宜野灣店</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：約 10 分鐘</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 導航設定「Round One Stadium 沖繩・宜野灣店」。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 21:00 – 23:00 🎮 Round One 宜野灣店 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="activity">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">21:00 – 23:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <h3 class="text-lg font-extrabold">🎳 Round One Stadium 運動娛樂複合館</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=Round+One+Stadium+Ginowan" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：-</span>
+                  <span>⏱️ 停留/活動：2 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 超大夾娃娃機專區、保齡球、遊戲機。體力充沛大隊可加開暢玩「Spo-Cha 體育運動專區」（營業至凌晨 06:00），釋放全身精力！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 23:00 – 23:40 返回那霸酒店 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">23:00 – 23:40</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🚗 返回那霸飯店休息</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：約 40 分鐘</span>
+                  <span>⏱️ 停留/活動：-</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 全員安全駛回那霸 Tissage Hotel Naha。完美暢快的自駕冒險日安全落幕！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ✨ AI 方案按鈕 -->
+          <div class="flex justify-end pt-2">
+            <button onclick="generateDayPlan(3)" class="day-ai-btn px-4 py-2.5 rounded-2xl bg-gradient-to-r from-okinawa-600 to-sky-500 text-white font-bold text-xs shadow-md hover:opacity-90 transition flex items-center gap-1.5">
+              <span>✨ 生成今日 AI 備案與美食推薦</span>
+            </button>
+          </div>
+          <div id="aiPlan-3" class="hidden mt-3 p-4 bg-sky-50/50 dark:bg-sky-950/20 border border-sky-100 dark:border-sky-900/30 rounded-2xl text-xs leading-relaxed space-y-2"></div>
+        </section>
+
+        <!-- ========================= DAY 4 ========================= -->
+        <section id="section-4" class="scroll-mt-24 space-y-4">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-lg font-black bg-okinawa-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">4</span>
+            <div>
+              <h2 class="text-xl font-bold">18/7/2026 (六) 「北部夢幻藍・古宇利島與絕美海中水族館」</h2>
+              <p class="text-xs text-gray-400">自駕經典！橫跨最美古宇利大橋</p>
+            </div>
+          </div>
+
+          <!-- 景點：美麗海水族館 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">10:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold">🐋 美麗海水族館</h3>
+                  <p class="text-xs text-gray-400">巨型黑潮之海玻璃水槽 巨型鯨鯊</p>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E3%81%97%E3%81%84%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：自駕約 1.5 小時（自那霸）</span>
+                  <span>⏱️ 停留/活動：3.5 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 建議提前買妥電子門票節省排隊時間。下午 13:00 有免費海豚劇場戶外演出，極為震撼！可去「Ocean Blue 咖啡廳」近距離邊賞鯊邊午餐。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：古宇利海洋塔 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">15:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold">🗼 古宇利海洋塔</h3>
+                  <p class="text-xs text-gray-400">登高俯瞰Tiffany藍晶瑩海洋</p>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E3%82%BF%E3%83%AF%E3%83%BC" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通: 自駕約 40 分鐘</span>
+                  <span>⏱️ 停留/活動：1 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 乘坐自動高爾夫遊園車登頂。頂樓鐘樓展望海景超夢幻，室內設有漂亮的貝殼博物館，特別上鏡！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：心形岩 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">16:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold">💚 古宇利島・心形岩</h3>
+                  <p class="text-xs text-gray-400">矗立在蔚藍海水中的雙心礁石</p>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=%E5%BF%83%E5%BD%A2%E5%B2%A9+%E5%8F%A4%E5%AE%87%E5%88%A9%E5%B3%B6" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：自駕約 10 分鐘</span>
+                  <span>⏱️ 停留/活動：45 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 嵐 (Arashi) 的人氣海報取景點。在黃昏柔和的光線中與兩座愛心岩合照打卡（停車準備零錢投幣）。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：PARCO CITY 購物 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="shopping">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">19:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🛍️ San-A PARCO CITY 狂掃與海景晚餐</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：自駕約 1.5 小時（返航那霸方向）</span>
+                  <span>⏱️ 停留/活動：2.5 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 浦添市沿海超大型高階商場，在明亮寬敞的冷氣房中一邊享用精美海景晚餐，一邊補齊最後的伴手禮與彩妝精品！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：夜店 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="activity">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">22:00</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold">🍸 ChuraSun6 Okinawa</h3>
+                  <p class="text-xs text-gray-400">那霸頂奢夜生活體驗區</p>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=ChuraSun6+Okinawa" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box text-rose-800 dark:text-rose-300 border-coral-500 bg-coral-500/5">
+                <div class="meta-header text-coral-600 dark:text-coral-400">
+                  <span>🚗 交通：計程車約 15 分鐘（往返酒店）</span>
+                  <span>⏱️ 停留/活動：2 小時</span>
+                </div>
+                <p>• <strong>🚨 嚴禁酒後開車：</strong> 喝酒隊員請一律乘計程車往返酒店，或由不沾酒的司機負責代駕，平平安安享受沖繩最後一夜！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ✨ AI 方案按鈕 -->
+          <div class="flex justify-end pt-2">
+            <button onclick="generateDayPlan(4)" class="day-ai-btn px-4 py-2.5 rounded-2xl bg-gradient-to-r from-okinawa-600 to-sky-500 text-white font-bold text-xs shadow-md hover:opacity-90 transition flex items-center gap-1.5">
+              <span>✨ 生成今日 AI 備案與美食推薦</span>
+            </button>
+          </div>
+          <div id="aiPlan-4" class="hidden mt-3 p-4 bg-sky-50/50 dark:bg-sky-950/20 border border-sky-100 dark:border-sky-900/30 rounded-2xl text-xs leading-relaxed space-y-2"></div>
+        </section>
+
+        <!-- ========================= DAY 5 ========================= -->
+        <section id="section-5" class="scroll-mt-24 space-y-4">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="text-lg font-black bg-okinawa-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">5</span>
+            <div>
+              <h2 class="text-xl font-bold">19/7/2026 (日) 「首里祈福・滿載而歸」</h2>
+              <p class="text-xs text-gray-400">還車回港，為完美的假期畫上句點</p>
+            </div>
+          </div>
+
+          <!-- 景點：達摩寺 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">08:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <div class="flex justify-between items-start gap-3 flex-wrap">
+                <div>
+                  <h3 class="text-lg font-extrabold">⛩️ 首里西來院達摩寺</h3>
+                  <p class="text-xs text-gray-400">求籤與安產、旅行平安祈福地</p>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E6%9D%A5%E9%99%A2+%E9%81%94%E6%91%A9%E5%AF%BA" target="_blank" class="map-btn">🗺️ 導航</a>
+              </div>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：自駕約 15 分鐘</span>
+                  <span>⏱️ 停留/活動：1 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 首里城旁超靈驗的祈願古剎，購買可愛達摩繪馬寫下美好期許。注意：廟內空位極少，若泊車停滿請立刻前往對街收費停車位。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：還車 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">09:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">⛽ 尋找加油站加滿油 → 還車手續</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：自駕約 15 分鐘（往 Oki Blues 泉崎店）</span>
+                  <span>⏱️ 停留/活動：30 分鐘</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 日本租車規定：還車前務必在最靠近加油站**自助加滿油**，並將收據（Receipt）交付店員確認查驗。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 景點：歸程 -->
+          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="transit">
+            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+              <span class="time-badge">11:30</span>
+              <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+                <span class="text-xs text-gray-400">已打卡</span>
+              </label>
+            </div>
+            <div class="flex-1 space-y-3">
+              <h3 class="text-lg font-extrabold">🛫 抵達那霸機場 & 機場免稅大搜採</h3>
+              <div class="meta-box">
+                <div class="meta-header">
+                  <span>🚗 交通：還車後搭計程車約 10 分鐘</span>
+                  <span>⏱️ 停留/活動：2.5 小時</span>
+                </div>
+                <p>• <strong>備註/攻略：</strong> 提早 2.5 小時到達辦妥行李直掛。在國際線候機廳補買雪鹽餅乾、紅芋塔等沖繩土特產，搭機返回香港！完美收官！</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ✨ AI 方案按鈕 -->
+          <div class="flex justify-end pt-2">
+            <button onclick="generateDayPlan(5)" class="day-ai-btn px-4 py-2.5 rounded-2xl bg-gradient-to-r from-okinawa-600 to-sky-500 text-white font-bold text-xs shadow-md hover:opacity-90 transition flex items-center gap-1.5">
+              <span>✨ 生成今日 AI 備案與美食推薦</span>
+            </button>
+          </div>
+          <div id="aiPlan-5" class="hidden mt-3 p-4 bg-sky-50/50 dark:bg-sky-950/20 border border-sky-100 dark:border-sky-900/30 rounded-2xl text-xs leading-relaxed space-y-2"></div>
+        </section>
+
       </div>
-    </div>
+    </main>
+
+    <footer class="mt-16 text-center text-xs text-gray-400 dark:text-gray-500 border-t border-gray-200/50 dark:border-slate-800/80 pt-8 pb-12">
+      <p>🌺 LILY 著作權所有 © 2026</p>
+      <p class="mt-1 text-[10px]">Designed for high performance & responsive mobile/desktop viewports</p>
+    </footer>
+
   </div>
 
-  <!-- ========================= DAY 2 ========================= -->
-  <div class="day-section">
-    <div class="day-header" data-day="2">
-      <span>📅 Day 2｜16/7/2026 (四) 租車・水族館・Outlet・瀨長島日落</span>
-      <span class="toggle-icon">▼</span>
-    </div>
-    <div class="day-content collapsed" id="dayContent2">
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">09:00</span>
-          <div class="btn-group">
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E6%B2%96%E7%B8%84%E6%9C%9D%E9%A3%9F/" target="_blank">📸 #沖縄朝食</a>
-          </div>
-        </div>
-        <h3>☀️ 早餐（那霸市區）</h3>
-        <div class="comment-box">推薦「C&C Breakfast」或飯店附近。</div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">10:00</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://maps.app.goo.gl/DgbbpwwD2Gtg8ZRz6" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%82%AA%E3%82%AD%E3%83%96%E3%83%AB%E3%83%BC%E3%82%BA/" target="_blank">📸 #オキブルーズ</a>
-          </div>
-        </div>
-        <h3>🚗 Oki Blues 租車｜Vellfire 20系</h3>
-        <div class="rental-highlight">
-          <strong>📋 訂單資料</strong><br>
-          取車：16/7 10:00 ｜ 還車：19/7 10:00<br>
-          車款：Vellfire 20系 ｜ 費用：4天 56,000円（含稅＋全險）<br>
-          WhatsApp 090-2443-3667
-        </div>
-        <div class="comment-box">取車後直接前往 DMM 水族館（車程約 15 分鐘）。</div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">10:45</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=DMM+Kariyushi+Aquarium+Okinawa" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/DMM%E3%81%8B%E3%82%8A%E3%82%86%E3%81%97%E6%B0%B4%E6%97%8F%E9%A4%A8/" target="_blank">📸 #DMMかりゆし水族館</a>
-          </div>
-        </div>
-        <h3>🐟 DMM Kariyushi 水族館</h3>
-        <div class="comment-box">🌟 11:00 水獺觸摸體驗（必玩）<br>還有樹懶、企鵝，室內清涼好拍。</div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">12:30</span>
-          <div class="btn-group">
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E4%B8%B0%E8%A6%8B%E5%9F%8E%E3%82%B0%E3%83%AB%E3%83%A1/" target="_blank">📸 #豊見城グルメ</a>
-          </div>
-        </div>
-        <h3>🍽️ 午餐（豊見城周邊）</h3>
-        <div class="comment-box">推薦「琉球茶坊」或 Outlet 內美食街。</div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">13:30</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Okinawa+Outlet+Mall+Ashibinaa" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%82%A2%E3%82%B7%E3%83%93%E3%83%8A%E3%82%A2%E3%82%A6%E3%83%88%E3%83%AC%E3%83%83%E3%83%88/" target="_blank">📸 #アシビナアウトレット</a>
-          </div>
-        </div>
-        <h3>🛍️ Okinawa Outlet Mall Ashibinaa</h3>
-        <div class="comment-box">購物至16:00，地址：〒901-0225 豊見城市豊崎1-188。</div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">16:30</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%80%A8%E9%95%B7%E5%B3%B6+Umikaji+Terrace" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E7%80%A8%E9%95%B7%E5%B3%B6%E3%82%A6%E3%83%9F%E3%82%AB%E3%82%B8%E3%83%86%E3%83%A9%E3%82%B9/" target="_blank">📸 #瀬長島ウミカジテラス</a>
-          </div>
-        </div>
-        <h3>🌅 瀨長島 Umikaji Terrace (日落時分)</h3>
-        <p class="spot-note">從 Outlet 駕車約 10 分鐘即可抵達。</p>
-        <div class="comment-box"><strong>⭐ 重要備註：</strong> Jeffery 約 18:00 獨自開車前往機場接「大佬」。<br>✅ 其餘成員留在瀨長島，可繼續散步、吃幸福鬆餅、看飛機起降。之後可搭計程車回國際通飯店。</div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">19:30</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E8%A6%87+%E5%92%8C%E7%89%9B%E7%84%BC%E8%82%89" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E6%B2%96%E7%B8%84%E5%92%8C%E7%89%9B%E7%84%BC%E8%82%89/" target="_blank">📸 #沖縄和牛焼肉</a>
-          </div>
-        </div>
-        <h3>🥩 全員會合・極上和牛晚餐</h3>
-        <div class="comment-box">推薦「琉球の牛」或「八重山石垣牛 匠」。慶祝 Jeffery 順利接回大佬，乾杯！</div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">21:30</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Round+One+Naha" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%83%A9%E3%82%A6%E3%83%B3%E3%83%89%E3%83%AF%E3%83%B3%E9%82%A3%E8%A6%87/" target="_blank">📸 #ラウンドワン那覇</a>
-          </div>
-        </div>
-        <h3>🎳 Round One 那霸店（有體力的話）</h3>
-        <div class="comment-box">保齡球、KTV、夾娃娃，深夜狂歡。</div>
-      </div>
-    </div>
+  <!-- 手機端底部 Tab Bar (滾動高度防遮擋) -->
+  <div class="lg:hidden fixed bottom-0 inset-x-0 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-t border-gray-200/50 dark:border-slate-900 z-40 py-2 px-3 flex justify-between items-center shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+    <a href="#section-parking" class="mobile-nav-item flex flex-col items-center flex-1 text-center text-gray-400 dark:text-gray-500 hover:text-okinawa-600 dark:hover:text-okinawa-400">
+      <span class="text-lg">🚗</span>
+      <span class="text-[9px] font-bold mt-0.5">泊車</span>
+    </a>
+    <a href="#section-1" class="mobile-nav-item flex flex-col items-center flex-1 text-center text-gray-400 dark:text-gray-500 hover:text-okinawa-600 dark:hover:text-okinawa-400">
+      <span class="text-lg">❶</span>
+      <span class="text-[9px] font-bold mt-0.5">Day 1</span>
+    </a>
+    <a href="#section-2" class="mobile-nav-item flex flex-col items-center flex-1 text-center text-gray-400 dark:text-gray-500 hover:text-okinawa-600 dark:hover:text-okinawa-400">
+      <span class="text-lg">❷</span>
+      <span class="text-[9px] font-bold mt-0.5">Day 2</span>
+    </a>
+    <a href="#section-3" class="mobile-nav-item flex flex-col items-center flex-1 text-center text-gray-400 dark:text-gray-500 hover:text-okinawa-600 dark:hover:text-okinawa-400">
+      <span class="text-lg">❸</span>
+      <span class="text-[9px] font-bold mt-0.5">Day 3</span>
+    </a>
+    <a href="#section-4" class="mobile-nav-item flex flex-col items-center flex-1 text-center text-gray-400 dark:text-gray-500 hover:text-okinawa-600 dark:hover:text-okinawa-400">
+      <span class="text-lg">❹</span>
+      <span class="text-[9px] font-bold mt-0.5">Day 4</span>
+    </a>
+    <a href="#section-5" class="mobile-nav-item flex flex-col items-center flex-1 text-center text-gray-400 dark:text-gray-500 hover:text-okinawa-600 dark:hover:text-okinawa-400">
+      <span class="text-lg">❺</span>
+      <span class="text-[9px] font-bold mt-0.5">Day 5</span>
+    </a>
   </div>
 
-  <!-- ========================= DAY 3 ========================= -->
-  <div class="day-section">
-    <div class="day-header" data-day="3">
-      <span>📅 Day 3｜17/7/2026 (五) 恩納藍洞潛水・萬座毛・AEON Mall</span>
-      <span class="toggle-icon">▼</span>
-    </div>
-    <div class="day-content collapsed" id="dayContent3">
-      <!-- 潛水行程（DayDayGoodDays） -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">07:00</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://maps.app.goo.gl/YutoR63ED4z5uUzA8" target="_blank">🗺️ 集合點導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E6%81%A9%E7%B4%8D%E8%97%8D%E6%B4%9E/" target="_blank">📸 #恩納藍洞</a>
+  <!-- ============================================================ -->
+  <!-- ✨ FLOAT AI CHATBOT (智能懸浮伴旅對話窗) -->
+  <!-- ============================================================ -->
+  <div class="fixed bottom-24 md:bottom-6 right-6 z-50 flex flex-col items-end">
+    <!-- 聊天視窗 -->
+    <div id="aiChatWindow" class="hidden w-[350px] sm:w-[400px] h-[500px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border border-sky-100 dark:border-slate-800 rounded-3xl shadow-2xl mb-4 flex flex-col overflow-hidden transition-all duration-300 scale-95 origin-bottom-right">
+      <!-- 頂部 Header -->
+      <div class="p-4 bg-gradient-to-r from-okinawa-600 to-sky-500 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="text-2xl">✨</span>
+          <div>
+            <h3 class="font-extrabold text-sm leading-tight">阿榮沖繩伴旅秘書</h3>
+            <p class="text-[10px] text-sky-100 leading-none">Gemini LLM 核心智腦驅動</p>
           </div>
         </div>
-        <h3>🤿 恩納藍洞浮潛+體驗潛水組合（各1潛）</h3>
-        <p class="spot-note">
-          <strong>集合地點：</strong>〒904-0414 沖縄県国頭郡恩納村前兼久114-1（前兼久漁港）<br>
-          <strong>集合時間：</strong>08:15（日本時間 GMT+9）<br>
-          <span style="color:var(--muted);">※ 07:00 從那霸出發，車程約 55 分鐘</span>
+        <div class="flex items-center gap-1.5">
+          <!-- API Key 設定鎖頭按鈕 -->
+          <button onclick="toggleApiKeySettings()" class="p-1.5 rounded-full hover:bg-white/10 transition" title="API Key 設定">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          </button>
+          <button onclick="toggleAiChat()" class="p-1 rounded-full hover:bg-white/10 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- API Key 設定面板 (預設隱藏) -->
+      <div id="apiKeySettingsPanel" class="hidden p-3 bg-slate-100 dark:bg-slate-950 border-b border-gray-200 dark:border-slate-800 text-xs">
+        <p class="font-bold text-gray-700 dark:text-gray-300 mb-1.5 flex items-center gap-1.5">
+          <span>🔑 設定您的 Gemini API Key</span>
+          <span id="apiKeyStatus" class="w-2.5 h-2.5 rounded-full bg-rose-500" title="尚未設定金鑰"></span>
         </p>
-        <div class="comment-box">
-          <div style="margin-bottom:8px;">
-            <span class="parking-tag free" style="background:#27ae60; color:white; padding:2px 10px; border-radius:20px; font-size:0.7rem; font-weight:700;">免費</span>
-            <strong>停車場：</strong>港口內免費停車場（無需預約）
-          </div>
-          <div style="font-size:0.9rem; line-height:1.6;">
-            <strong>📌 重要提醒：</strong><br>
-            • 集合地點在 <strong>漁港港口</strong>，不在店家店面，活動結束後會回店沖身及更衣。<br>
-            • 請先自行穿著泳裝，到步後只需穿上潛水衣。<br>
-            • 自備浴巾（活動後簡單沖身用）。<br>
-            • 集合時間為 <strong>08:15</strong>（日本時間 GMT+9），請務必準時到達。<br>
-            • 因應日本政府和保險要求，客人必須親自在活動當天填寫健康表格。
-          </div>
-          <div style="margin-top:8px; background:var(--surface-2); padding:8px 12px; border-radius:10px; font-size:0.82rem;">
-            <strong>📋 活動流程（約4小時）</strong><br>
-            ① 到步集合點 → ② 填寫健康表格 → ③ 更換裝備（請先自行穿着泳裝）→ ④ 第一活動簡介 → ⑤ 前往港口上船 → ⑥ 第一潛開始 → ⑦ 第一潛結束，乘船回港 → ⑧ 港口休息，準備第二活動 → ⑨ 第二活動簡介 → ⑩ 前往港口上船 → ⑪ 第二潛開始 → ⑫ 第二潛結束，乘船回港 → ⑬ 交還裝備及簡單沖身（請自備浴巾）→ ⑭ 港口解散
+        <div class="flex gap-2">
+          <input type="password" id="apiKeyInput" placeholder="請在此貼上您的 AIZAcy..." class="flex-1 px-2.5 py-1.5 rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-gray-800 dark:text-white focus:outline-none focus:ring-1 focus:ring-okinawa-500">
+          <button onclick="saveApiKey()" class="px-3 py-1.5 bg-okinawa-600 hover:bg-okinawa-700 text-white rounded-xl font-bold transition whitespace-nowrap">儲存</button>
+        </div>
+        <p class="text-[9px] text-gray-400 mt-1">此金鑰儲存在您的本機瀏覽器中，安全保密，不傳送到外部伺服器。</p>
+      </div>
+
+      <!-- 快速範本按鈕 -->
+      <div class="p-2.5 bg-slate-50 dark:bg-slate-950/40 border-b border-gray-100 dark:border-slate-800/80 overflow-x-auto flex gap-1.5 no-scrollbar">
+        <button onclick="fillPrompt('✨ 推薦國際通附近好吃的深夜居酒屋')" class="text-[10px] font-bold bg-white dark:bg-slate-800 px-2.5 py-1.5 rounded-xl whitespace-nowrap shadow-sm border border-gray-200/50 dark:border-slate-700/50 hover:bg-sky-50 dark:hover:bg-slate-700 transition">
+          🏮 深夜居酒屋
+        </button>
+        <button onclick="fillPrompt('✨ 幫 Lily (自然愛好) 與 Alex (玩具模型) 提議第三天的新增備案')" class="text-[10px] font-bold bg-white dark:bg-slate-800 px-2.5 py-1.5 rounded-xl whitespace-nowrap shadow-sm border border-gray-200/50 dark:border-slate-700/50 hover:bg-sky-50 dark:hover:bg-slate-700 transition">
+          🧸 旅伴專屬建議
+        </button>
+        <button onclick="fillPrompt('✨ Jeffery 臨時需要找好停 Vellfire 大休旅車的停車場，有推薦嗎？')" class="text-[10px] font-bold bg-white dark:bg-slate-800 px-2.5 py-1.5 rounded-xl whitespace-nowrap shadow-sm border border-gray-200/50 dark:border-slate-700/50 hover:bg-sky-50 dark:hover:bg-slate-700 transition">
+          🚗 泊車求助
+        </button>
+      </div>
+
+      <!-- 聊天對話流 -->
+      <div id="chatBody" class="flex-1 p-4 overflow-y-auto space-y-3.5 text-xs">
+        
+        <!-- API Key 警告看板 (未設定 Key 時顯示) -->
+        <div id="keyAlertBanner" class="p-3 mb-2 rounded-2xl bg-amber-50 border border-amber-200 dark:bg-amber-950/40 dark:border-amber-900 text-amber-800 dark:text-amber-200 transition">
+          <p class="font-bold flex items-center gap-1">
+            <span>⚠️ 尚未設定 API Key</span>
+          </p>
+          <p class="mt-1 text-[11px] leading-tight text-amber-700/90 dark:text-amber-300/90">
+            請點擊右上角 <span class="font-bold">🔑鎖頭圖示</span>，或點擊下方按鈕輸入您的 Gemini API Key 以啟用完整 AI 伴旅與每日行程優化功能！
+          </p>
+          <button onclick="openApiKeySettings()" class="mt-2.5 w-full py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-xl font-bold transition text-[11px] shadow-sm">
+            👉 立即設定 API Key
+          </button>
+        </div>
+
+        <div class="flex gap-2">
+          <div class="w-7 h-7 rounded-full bg-okinawa-100 dark:bg-okinawa-900/60 flex items-center justify-center text-sm shadow-sm shrink-0">✨</div>
+          <div class="bg-slate-50 dark:bg-slate-950/30 border border-gray-100 dark:border-slate-800 p-3 rounded-2xl max-w-[85%] text-gray-700 dark:text-gray-300">
+            哈囉！我是你們的**沖繩自駕 AI 秘書**。🌺<br><br>
+            我已經熟記了你們 **5 天 4 夜的全部自駕行程**與所有人（Alex, Lily, Jeffery, Jojo, Anthony, Carman）的特點！<br><br>
+            想問美食、停車位、找玩具、問日語還是天氣備案？隨時吩咐！
           </div>
         </div>
       </div>
-      
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">12:30</span>
-          <div class="btn-group">
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E6%81%A9%E7%B4%8D%E6%9D%91%E3%82%B0%E3%83%AB%E3%83%A1/" target="_blank">📸 #恩納村グルメ</a>
-          </div>
-        </div>
-        <h3>🍴 午餐（恩納村）</h3>
-        <div class="comment-box">推薦「海鮮料理 浜の家」或「琉球の牛 恩納店」。</div>
-      </div>
-      
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">14:00</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E8%90%AC%E5%BA%A7%E6%AF%9B" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E4%B8%87%E5%BA%A7%E6%AF%9B/" target="_blank">📸 #万座毛</a>
-          </div>
-        </div>
-        <h3>🌊 萬座毛</h3>
-        <div class="comment-box">象鼻岩打卡，停留30分鐘。</div>
-      </div>
-      
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">16:00</span>
-          <div class="btn-group">
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%83%86%E3%82%A3%E3%82%B5%E3%83%BC%E3%82%B8%E3%83%9B%E3%83%86%E3%83%AB%E9%82%A3%E8%A6%87/" target="_blank">📸 #ティサージホテル那覇</a>
-          </div>
-        </div>
-        <h3>🛁 返回 Tissage Hotel Naha 梳洗</h3>
-        <div class="comment-box">換裝、休息，準備晚間逛街。</div>
-      </div>
-      
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">18:00</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=AEON+MALL+Rycom+Okinawa" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E6%B2%96%E7%B8%84%E3%83%A9%E3%82%A4%E3%82%AB%E3%83%A0/" target="_blank">📸 #イオンモール沖縄ライカム</a>
-          </div>
-        </div>
-        <h3>🏬 AEON MALL Rycom</h3>
-        <div class="comment-box">沖繩最大商場，晚餐＋購物至21:30。</div>
+
+      <!-- 輸入欄 -->
+      <div class="p-3 bg-slate-50 dark:bg-slate-950/40 border-t border-gray-100 dark:border-slate-800/80 flex gap-2 items-center">
+        <input type="text" id="chatInput" placeholder="輸入您的提問... (例如: 下雨了怎麼辦?)" class="flex-1 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 px-4 py-2 rounded-2xl text-xs focus:outline-none focus:ring-2 focus:ring-okinawa-500 dark:text-white" onkeydown="if(event.key === 'Enter') sendChatMessage()">
+        <button onclick="sendChatMessage()" id="chatSendBtn" class="p-2.5 bg-okinawa-600 hover:bg-okinawa-700 text-white rounded-2xl transition shadow-md flex items-center justify-center">
+          <svg class="w-4 h-4 transform rotate-90" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
+        </button>
       </div>
     </div>
+
+    <!-- 浮動按鈕按鍵 -->
+    <button onclick="toggleAiChat()" class="w-14 h-14 bg-gradient-to-tr from-okinawa-600 to-sky-500 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 border border-white/20">
+      <span class="text-2xl animate-pulse">✨</span>
+    </button>
   </div>
 
-  <!-- ========================= DAY 4 ========================= -->
-  <div class="day-section">
-    <div class="day-header" data-day="4">
-      <span>📅 Day 4｜18/7/2026 (六) 美麗海水族館・古宇利島・PARCO CITY・ChuraSun6 夜店</span>
-      <span class="toggle-icon">▼</span>
-    </div>
-    <div class="day-content collapsed" id="dayContent4">
-      <!-- 美麗海水族館 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">10:30</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E9%BA%97%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E7%BE%8E%E3%81%97%E3%81%84%E6%B5%B7%E6%B0%B4%E6%97%8F%E9%A4%A8/" target="_blank">📸 #美ら海水族館</a>
-          </div>
-        </div>
-        <h3>🐋 美麗海水族館</h3>
-        <div class="comment-box">鯨鯊水槽、海豚劇場（推薦13:00場）。提前預約咖啡廳窗邊座位。</div>
-      </div>
 
-      <!-- 古宇利海洋塔 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">15:30</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E5%A1%94" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E5%8F%A4%E5%AE%87%E5%88%A9%E6%B5%B7%E6%B4%8B%E3%82%BF%E3%83%AF%E3%83%BC/" target="_blank">📸 #古宇利海洋タワー</a>
-          </div>
-        </div>
-        <h3>🗼 古宇利海洋塔</h3>
-        <div class="comment-box">自動車上山，展望台景色絕美。</div>
-      </div>
+  <script>
+    // ============================================================
+    // ✨ GEMINI API 配置與核心機制
+    // ============================================================
+    // 為了 GitHub 公開倉庫的安全，此處不寫死 API Key
+    const apiKey = ""; 
 
-      <!-- 心形岩 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">16:30</span>
-          <div class="btn-group">
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%83%8F%E3%83%BC%E3%83%88%E3%83%AD%E3%83%83%E3%82%AF%E5%8F%A4%E5%AE%87%E5%88%A9%E5%B3%B6/" target="_blank">📸 #ハートロック古宇利島</a>
-          </div>
-        </div>
-        <h3>💚 心形岩</h3>
-        <div class="comment-box">退潮時可近距離拍愛心岩，Lily 喜愛自然景點。</div>
-      </div>
-
-      <!-- PARCO CITY -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">18:30</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=PARCO+CITY+%E6%B5%A6%E7%94%B0" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%83%91%E3%83%AB%E3%82%B3%E3%82%B7%E3%83%86%E3%82%A3%E6%B5%A6%E6%B7%BB/" target="_blank">📸 #パルコシティ浦添</a>
-          </div>
-        </div>
-        <h3>🛍️ PARCO CITY (浦添)</h3>
-        <div class="comment-box">沖繩最新大型購物中心，營業至22:00。晚餐可在美食街解決。</div>
-      </div>
-
-      <!-- ChuraSun6 沖繩 夜店 -->
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">22:00</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Churasun6+Okinawa+Naha" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/churasun6/" target="_blank">📸 #churasun6</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%81%A1%E3%82%85%E3%82%89%E3%81%956/" target="_blank">📸 #ちゅらさん6</a>
-          </div>
-        </div>
-        <h3>🎭 ChuraSun6 沖繩（ちゅらさん6）</h3>
-        <p class="spot-note">
-          〒900-0032 沖縄県那覇市松山1-5-1 ナムラプラザビル 2F<br>
-          <span style="font-size:0.85rem; color:var(--muted);">從松山十字路口步行約 2 分鐘</span>
-        </p>
-        <div class="comment-box">
-          <div style="display:flex; flex-wrap:wrap; gap:4px 20px; margin-bottom:6px;">
-            <span>🎫 <strong>第2場</strong> 22:00 開放入場</span>
-            <span>🎬 <strong>22:30</strong> 開演</span>
-          </div>
-          <div style="font-size:0.9rem; line-height:1.6;">
-            💃 日本最大規模的 Show Club，沉浸式劇場體驗，結合舞蹈、音樂與舞台表演。<br>
-            🚗 夜店周邊停車位有限，建議 <strong>搭計程車</strong> 或使用附近 Coin Parking。
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- dayContent4 結束 -->
-  </div>
-  <!-- day-section Day 4 結束 -->
-
-  <!-- ========================= DAY 5 ========================= -->
-  <div class="day-section">
-    <div class="day-header" data-day="5">
-      <span>📅 Day 5｜19/7/2026 (日) 達摩寺參拜・從容還車</span>
-      <span class="toggle-icon">▼</span>
-    </div>
-    <div class="day-content collapsed" id="dayContent5">
-      <div class="spot-card">
-        <div class="spot-top"><span class="time-badge">07:30</span></div>
-        <h3>☀️ 早餐（Tissage Hotel 或周邊）</h3>
-        <div class="comment-box">早起享用早餐，準備前往達摩寺參拜。</div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">08:00</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E4%BE%86%E9%99%A2%E9%81%94%E6%91%A9%E5%AF%BA+%E6%B2%96%E7%B8%A9" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E8%A5%BF%E4%BE%86%E9%99%A2%E9%81%94%E6%91%A9%E5%AF%BA/" target="_blank">📸 #西來院達摩寺</a>
-          </div>
-        </div>
-        <h3>📍 西來院達摩寺</h3>
-        <p class="spot-note">沖繩縣那霸市首里赤田町1丁目5-1（從飯店駕車約 30 分鐘）</p>
-        <div class="comment-box">
-          <strong>🙏 沖繩隱世求財聖地</strong><br>
-          達摩有個特別之處：購買後先許願，許願後在達摩右眼畫上一點，願望成真後再畫左眼那一點。<br>
-          ⏰ 開放時間：7:00～18:00
-        </div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">10:00</span>
-          <div class="btn-group">
-            <a class="map-btn" href="https://maps.app.goo.gl/DgbbpwwD2Gtg8ZRz6" target="_blank">🗺️ 導航</a>
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E3%82%AA%E3%82%AD%E3%83%96%E3%83%AB%E3%83%BC%E3%82%BA/" target="_blank">📸 #オキブルーズ</a>
-          </div>
-        </div>
-        <h3>⏱️ Oki Blues 還車</h3>
-        <p class="spot-note">從達摩寺駕車約 25 分鐘即可抵達租車公司。</p>
-        <div class="comment-box">加滿油、檢查行李，還車後搭接駁車至那霸機場。</div>
-      </div>
-
-      <div class="spot-card">
-        <div class="spot-top">
-          <span class="time-badge">11:30</span>
-          <div class="btn-group">
-            <a class="ig-btn" href="https://www.instagram.com/explore/tags/%E9%82%A3%E8%A6%87%E7%A9%BA%E6%B8%AF%E5%9B%BD%E5%86%85%E7%B7%9A/" target="_blank">📸 #那覇空港国内線</a>
-          </div>
-        </div>
-        <h3>🛫 那霸機場・最後採買</h3>
-        <div class="comment-box">買紅芋塔、Royce、沖繩限定伴手禮，準備返港。</div>
-      </div>
-    </div>
-    <!-- dayContent5 結束 -->
-  </div>
-  <!-- day-section Day 5 結束 -->
-
-  <div class="footer">made by LILY ❤️ ｜ 點擊日期標題可折疊/展開行程｜右上角切換黑暗模式</div>
-</div>
-
-<script>
-  // 折疊功能（支援所有 data-day）
-  const headers = document.querySelectorAll('.day-header');
-  headers.forEach(header => {
-    header.addEventListener('click', () => {
-      const dayNumber = header.getAttribute('data-day');
-      const contentDiv = document.getElementById(`dayContent${dayNumber}`);
-      const iconSpan = header.querySelector('.toggle-icon');
-      if (contentDiv) {
-        contentDiv.classList.toggle('collapsed');
-        iconSpan.innerHTML = contentDiv.classList.contains('collapsed') ? '▶' : '▼';
-      }
-    });
-  });
-
-  // 黑暗模式
-  const toggleBtn = document.getElementById('darkModeToggle');
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark') {
-    document.body.classList.add('dark');
-    toggleBtn.textContent = '☀️ 淺色模式';
-  } else {
-    document.body.classList.remove('dark');
-    toggleBtn.textContent = '🌙 黑暗模式';
-  }
-  toggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-    if (document.body.classList.contains('dark')) {
-      localStorage.setItem('theme', 'dark');
-      toggleBtn.textContent = '☀️ 淺色模式';
-    } else {
-      localStorage.setItem('theme', 'light');
-      toggleBtn.textContent = '🌙 黑暗模式';
+    // 獲取當前有效的 API Key (LocalStorage 優先)
+    function getActiveApiKey() {
+      const userKey = localStorage.getItem('gemini_api_key');
+      return userKey ? userKey.trim() : apiKey;
     }
-  });
-</script>
+
+    const SYSTEM_PROMPT = `
+你是一位熟悉日本沖繩、性格活潑幽默且體貼周到的「金牌自駕旅行導遊兼AI秘書」。
+現在阿榮、Lily、Alex、Jeffery、Jojo、Anthony、Carman 共 6 人正在進行 2026 年 7 月 15 日至 19 日的沖繩 5 天 4 夜自駕之旅，請以此角色為他們提供最棒的建議。
+
+旅伴喜好與功能檔案：
+- Alex: 喜歡模型玩具、中古模型尋寶（Day 1 已安排駿河屋）。
+- Lily: 熱愛自然風景與戶外活動。
+- Jeffery: 司機主力，需要寬大 Vellfire 20系 好停的車位。Day 2 下午 18:00 要去接「大佬」。
+- Jojo: 潛水愛好者。
+- Anthony: 吃貨，美食雷達，喜歡道地沖繩菜、燒肉。
+- Carman: 熱愛雜貨精品、精品掃貨（LV 預約 T Galleria）。
+
+已預訂住宿：
+- Tissage Hotel Naha（那霸市西區，Day 1~4 均住這）
+已預訂車輛：
+- Vellfire 20系 大休旅車（16/7 ~ 19/7 由 Oki Blues 租賃）
+
+請遵守：
+1. 你的回答必須使用「繁體中文（香港/台灣）」書寫，語氣活潑親切。
+2. 當提到路線與停車時，要顧慮 Vellfire 20系 是大中型休旅車，窄巷小車位不好停，建議停放寬敞公共平面停車場。
+3. 若下雨，多提供室內商場（PARCO CITY, T Galleria, 永旺來客夢）或水族館作為室內備案。
+4. 提供回答時要簡潔有力，排版清晰美觀，多使用 Emoji。
+`;
+
+    // 帶有指數退避的 Gemini 請求核心函數
+    async function callGemini(prompt, dayPlanContext = "") {
+      const activeKey = getActiveApiKey();
+      if (!activeKey) {
+        // 如果使用者尚未填寫 API Key，自動開啟設定面板引導使用者填寫
+        showToast("🔑 請先設定您的 Gemini API Key！已為您開啟設定面板。", "error");
+        openApiKeySettings();
+        throw new Error("API Key 未設定");
+      }
+
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${activeKey}`;
+      
+      const payload = {
+        contents: [{ parts: [{ text: prompt }] }],
+        systemInstruction: { parts: [{ text: SYSTEM_PROMPT + "\n" + dayPlanContext }] }
+      };
+
+      let delay = 1000;
+      for (let attempt = 0; attempt < 5; attempt++) {
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          const data = await response.json();
+          const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (text) return text;
+          throw new Error("回應內容不完整");
+        } catch (error) {
+          if (attempt === 4) {
+            throw error; // 達到最大嘗試次數，拋出錯誤
+          }
+          await new Promise(resolve => setTimeout(resolve, delay));
+          delay *= 2; // 指數退避
+        }
+      }
+    }
+
+    // 發送吐司通知
+    function showToast(message, type = "info") {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `p-4 rounded-2xl text-xs font-bold shadow-lg transition-all transform translate-y-2 opacity-0 pointer-events-auto flex items-center gap-2 max-w-sm border ${
+        type === 'error' 
+          ? 'bg-rose-50 border-rose-200 text-rose-800 dark:bg-rose-950/90 dark:border-rose-900 dark:text-rose-200' 
+          : 'bg-sky-50 border-sky-200 text-sky-800 dark:bg-sky-950/90 dark:border-sky-900 dark:text-sky-200'
+      }`;
+      toast.innerHTML = `<span>✨</span><span>${message}</span>`;
+      container.appendChild(toast);
+
+      // 動態進場
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 50);
+
+      // 4秒後退場
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+
+    // ============================================================
+    // ✨ AI 方案生成與對話邏輯
+    // ============================================================
+    async function generateDayPlan(dayNumber) {
+      const container = document.getElementById(`aiPlan-${dayNumber}`);
+      const btn = container.previousElementSibling.querySelector('button') || container.previousElementSibling;
+      
+      // 獲取該天行程的卡片內容大綱做為 context
+      const daySection = document.getElementById(`section-${dayNumber}`);
+      const cardsText = Array.from(daySection.querySelectorAll('.spot-card h3'))
+        .map(h => h.textContent.trim())
+        .join(' ➔ ');
+
+      container.classList.remove('hidden');
+      container.innerHTML = `
+        <div class="flex items-center gap-2 text-sky-600 dark:text-sky-400 font-bold">
+          <svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span>正在請求 Gemini 智腦計算最棒的 Day ${dayNumber} AI 專屬備案與驚喜推薦...</span>
+        </div>
+      `;
+
+      const prompt = `
+請針對本自駕行程的 Day ${dayNumber}（當天主要行程為：${cardsText}），為大夥量身生成一組「✨ AI 雨天備案與推薦」：
+1. ☔ 一個高質感的雨天/室內備份方案（要考慮到大中型休旅車 Vellfire 的好停度）。
+2. 🍖 當天路線順路的隱藏美食、道地居酒屋或甜點推薦。
+3. 💡 針對當天行程給予一條最驚豔的自駕駕駛或拍照攻略。
+字數約 200 字，分段清晰，並多使用 emoji！
+`;
+
+      try {
+        const result = await callGemini(prompt, `當前處理的是 Day ${dayNumber}`);
+        // 格式化 markdown 粗體與換行
+        container.innerHTML = `
+          <div class="flex justify-between items-center border-b border-sky-100 dark:border-sky-900 pb-2 mb-2">
+            <span class="font-extrabold text-sky-700 dark:text-sky-300">✨ Day ${dayNumber} AI 專屬備份與隱藏美食</span>
+            <button onclick="document.getElementById('aiPlan-${dayNumber}').classList.add('hidden')" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">收合</button>
+          </div>
+          <div class="prose prose-sm dark:prose-invert text-[11px] whitespace-pre-line text-gray-600 dark:text-gray-300">
+            ${result.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}
+          </div>
+        `;
+        showToast(`Day ${dayNumber} 的專屬 AI 備份推薦已順利生成！`);
+      } catch (error) {
+        container.classList.add('hidden');
+        showToast("Gemini 服務暫時繁忙，請稍候重試！", "error");
+      }
+    }
+
+    // 懸浮聊天室開關
+    function toggleAiChat() {
+      const win = document.getElementById('aiChatWindow');
+      if (win.classList.contains('hidden')) {
+        win.classList.remove('hidden');
+        setTimeout(() => {
+          win.classList.remove('scale-95', 'opacity-0');
+        }, 10);
+        // 開啟時，更新密鑰狀態指示燈
+        updateApiKeyStatus();
+      } else {
+        win.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          win.classList.add('hidden');
+        }, 300);
+      }
+    }
+
+    // 切換 API Key 設定面板
+    function toggleApiKeySettings() {
+      const panel = document.getElementById('apiKeySettingsPanel');
+      panel.classList.toggle('hidden');
+      updateApiKeyStatus();
+    }
+
+    // 主動開啟 API Key 設定
+    function openApiKeySettings() {
+      const win = document.getElementById('aiChatWindow');
+      if (win.classList.contains('hidden')) {
+        toggleAiChat();
+      }
+      const panel = document.getElementById('apiKeySettingsPanel');
+      panel.classList.remove('hidden');
+      document.getElementById('apiKeyInput').focus();
+      updateApiKeyStatus();
+    }
+
+    // 儲存 API Key 至本地瀏覽器
+    function saveApiKey() {
+      const input = document.getElementById('apiKeyInput');
+      const key = input.value.trim();
+      if (key) {
+        localStorage.setItem('gemini_api_key', key);
+        showToast("🔑 API Key 儲存成功！AI 伴旅功能已完整開啟。");
+        document.getElementById('apiKeySettingsPanel').classList.add('hidden');
+        updateApiKeyStatus();
+      } else {
+        localStorage.removeItem('gemini_api_key');
+        showToast("🔑 API Key 已清除。", "error");
+        updateApiKeyStatus();
+      }
+    }
+
+    // 更新 API Key 指示燈與橫幅狀態
+    function updateApiKeyStatus() {
+      const activeKey = getActiveApiKey();
+      const statusLight = document.getElementById('apiKeyStatus');
+      const input = document.getElementById('apiKeyInput');
+      const banner = document.getElementById('keyAlertBanner');
+      
+      if (activeKey) {
+        if (statusLight) {
+          statusLight.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
+          statusLight.title = "已設定 API Key";
+        }
+        if (input && !input.value) {
+          input.value = activeKey; // 自動填入現有密鑰
+        }
+        if (banner) banner.classList.add('hidden');
+      } else {
+        if (statusLight) {
+          statusLight.className = "w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse";
+          statusLight.title = "尚未設定 API Key";
+        }
+        if (banner) banner.classList.remove('hidden');
+      }
+    }
+
+    // 點擊 Banner 快速發問
+    function openChatWithPrompt(promptText) {
+      const win = document.getElementById('aiChatWindow');
+      if (win.classList.contains('hidden')) {
+        toggleAiChat();
+      }
+      fillPrompt(promptText);
+    }
+
+    // 點擊範本填入輸入欄並自動發送
+    function fillPrompt(text) {
+      document.getElementById('chatInput').value = text;
+      sendChatMessage();
+    }
+
+    // 發送聊天訊息
+    async function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const body = document.getElementById('chatBody');
+      const sendBtn = document.getElementById('chatSendBtn');
+      const query = input.value.trim();
+
+      if (!query) return;
+
+      // 渲染使用者氣泡
+      const userBubble = document.createElement('div');
+      userBubble.className = 'flex gap-2 justify-end';
+      userBubble.innerHTML = `
+        <div class="bg-okinawa-600 text-white p-3 rounded-2xl max-w-[85%] font-medium">
+          ${query}
+        </div>
+      `;
+      body.appendChild(userBubble);
+      body.scrollTop = body.scrollHeight;
+
+      // 清空輸入框
+      input.value = "";
+      input.disabled = true;
+      sendBtn.disabled = true;
+
+      // 渲染載入中氣泡
+      const loadingBubble = document.createElement('div');
+      loadingBubble.className = 'flex gap-2';
+      loadingBubble.id = 'ai-loading';
+      loadingBubble.innerHTML = `
+        <div class="w-7 h-7 rounded-full bg-okinawa-100 dark:bg-okinawa-900/60 flex items-center justify-center text-sm shadow-sm shrink-0">✨</div>
+        <div class="bg-slate-50 dark:bg-slate-950/30 border border-gray-100 dark:border-slate-800 p-3 rounded-2xl text-gray-400 flex items-center gap-1.5">
+          <svg class="animate-spin h-3.5 w-3.5 text-okinawa-600" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span>AI 秘書正翻看沖繩指南中...</span>
+        </div>
+      `;
+      body.appendChild(loadingBubble);
+      body.scrollTop = body.scrollHeight;
+
+      try {
+        const reply = await callGemini(query);
+        
+        // 移除載入中氣泡
+        document.getElementById('ai-loading').remove();
+
+        // 渲染 AI 氣泡
+        const aiBubble = document.createElement('div');
+        aiBubble.className = 'flex gap-2';
+        aiBubble.innerHTML = `
+          <div class="w-7 h-7 rounded-full bg-okinawa-100 dark:bg-okinawa-900/60 flex items-center justify-center text-sm shadow-sm shrink-0">✨</div>
+          <div class="bg-slate-50 dark:bg-slate-950/30 border border-gray-100 dark:border-slate-800 p-3 rounded-2xl max-w-[85%] text-gray-700 dark:text-gray-300 whitespace-pre-line leading-relaxed">
+            ${reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}
+          </div>
+        `;
+        body.appendChild(aiBubble);
+      } catch (error) {
+        document.getElementById('ai-loading').remove();
+        const errorBubble = document.createElement('div');
+        errorBubble.className = 'flex gap-2';
+        errorBubble.innerHTML = `
+          <div class="w-7 h-7 rounded-full bg-rose-100 dark:bg-rose-950 flex items-center justify-center text-sm shrink-0">⚠️</div>
+          <div class="bg-rose-50 border border-rose-100 p-3 rounded-2xl text-rose-700 max-w-[85%] text-[11px]">
+            對不起，連線出了點小差錯，沒能成功聯絡上 Gemini 秘書。請確保網路正常後再試一次！
+          </div>
+        `;
+        body.appendChild(errorBubble);
+      } finally {
+        input.disabled = false;
+        sendBtn.disabled = false;
+        input.focus();
+        body.scrollTop = body.scrollHeight;
+      }
+    }
+
+
+    // ============================================================
+    // 原有交互與適配邏輯
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      // 網頁加載時初始化 API Key 指示燈狀態
+      updateApiKeyStatus();
+
+      // --- 1. 暗黑模式切換 ---
+      const themeToggle = document.getElementById('themeToggle');
+      
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      themeToggle.addEventListener('click', () => {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.theme = 'light';
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.theme = 'dark';
+        }
+      });
+
+
+      // --- 2. 手風琴折疊/展開控制 (泊車資訊) ---
+      const parkingHeader = document.querySelector('.day-header[data-day="parking"]');
+      if (parkingHeader) {
+        parkingHeader.addEventListener('click', () => {
+          const content = document.getElementById('dayContentparking');
+          const icon = parkingHeader.querySelector('.toggle-icon');
+          
+          if (content.classList.contains('collapsed')) {
+            content.classList.remove('collapsed');
+            content.style.maxHeight = content.scrollHeight + 'px';
+            content.style.opacity = '1';
+            icon.textContent = '▼';
+          } else {
+            content.classList.add('collapsed');
+            content.style.maxHeight = '0px';
+            content.style.opacity = '0';
+            icon.textContent = '▶';
+          }
+        });
+      }
+
+
+      // --- 3. 踩點勾選進度計算 ---
+      const checkboxes = document.querySelectorAll('.visit-checkbox');
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+
+      function updateProgress() {
+        const total = checkboxes.length;
+        let checkedCount = 0;
+        
+        checkboxes.forEach((cb, index) => {
+          const savedState = localStorage.getItem(`spot-${index}`);
+          if (savedState === 'checked') {
+            cb.checked = true;
+          }
+          
+          if (cb.checked) {
+            checkedCount++;
+            cb.closest('.spot-card').classList.add('opacity-60', 'border-emerald-300', 'dark:border-emerald-950');
+          } else {
+            cb.closest('.spot-card').classList.remove('opacity-60', 'border-emerald-300', 'dark:border-emerald-950');
+          }
+        });
+
+        const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+        progressBar.style.width = `${percentage}%`;
+        progressText.textContent = `${percentage}% (${checkedCount}/${total})`;
+      }
+
+      checkboxes.forEach((cb, index) => {
+        cb.addEventListener('change', () => {
+          if (cb.checked) {
+            localStorage.setItem(`spot-${index}`, 'checked');
+          } else {
+            localStorage.removeItem(`spot-${index}`);
+          }
+          updateProgress();
+        });
+      });
+
+      updateProgress();
+
+
+      // --- 4. 景點類別過濾篩選器 ---
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.spot-card');
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filterValue = btn.getAttribute('data-filter');
+
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-okinawa-600', 'text-white', 'shadow-md', 'active');
+            b.classList.add('bg-white', 'dark:bg-slate-800', 'text-gray-600', 'dark:text-gray-300', 'border', 'border-gray-200', 'dark:border-slate-700');
+          });
+          btn.classList.add('bg-okinawa-600', 'text-white', 'shadow-md', 'active');
+          btn.classList.remove('bg-white', 'dark:bg-slate-800', 'text-gray-600', 'dark:text-gray-300', 'border', 'border-gray-200', 'dark:border-slate-700');
+
+          cards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filterValue === 'all') {
+              card.style.display = 'flex';
+            } else if (category === filterValue) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+
+      // --- 5. 一鍵展開/收合全部天數行程 ---
+      const expandAllBtn = document.getElementById('expandAllBtn');
+      const collapseAllBtn = document.getElementById('collapseAllBtn');
+
+      expandAllBtn.addEventListener('click', () => {
+        const content = document.getElementById('dayContentparking');
+        if (content && content.classList.contains('collapsed')) {
+          content.classList.remove('collapsed');
+          content.style.maxHeight = content.scrollHeight + 'px';
+          content.style.opacity = '1';
+          const icon = parkingHeader.querySelector('.toggle-icon');
+          if (icon) icon.textContent = '▼';
+        }
+      });
+
+      collapseAllBtn.addEventListener('click', () => {
+        const content = document.getElementById('dayContentparking');
+        if (content && !content.classList.contains('collapsed')) {
+          content.classList.add('collapsed');
+          content.style.maxHeight = '0px';
+          content.style.opacity = '0';
+          const icon = parkingHeader.querySelector('.toggle-icon');
+          if (icon) icon.textContent = '▶';
+        }
+      });
+
+
+      // --- 6. 側邊欄/Tab欄 啟用高亮監聽 ---
+      const desktopNavItems = document.querySelectorAll('#desktopNav .nav-item');
+      const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+      function clearHighlights() {
+        desktopNavItems.forEach(item => {
+          item.classList.remove('bg-okinawa-50', 'dark:bg-slate-800', 'text-okinawa-600', 'dark:text-okinawa-400');
+        });
+        mobileNavItems.forEach(item => {
+          item.classList.remove('text-okinawa-600', 'dark:text-okinawa-400');
+          item.classList.add('text-gray-400', 'dark:text-gray-500');
+        });
+      }
+
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY + 200;
+        const sections = document.querySelectorAll('section[id^="section-"]');
+
+        sections.forEach(sec => {
+          const top = sec.offsetTop;
+          const height = sec.offsetHeight;
+          const id = sec.getAttribute('id');
+
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            clearHighlights();
+            
+            const activeDesktop = document.querySelector(`#desktopNav a[href="#${id}"]`);
+            if (activeDesktop) {
+              activeDesktop.classList.add('bg-okinawa-50', 'dark:bg-slate-800', 'text-okinawa-600', 'dark:text-okinawa-400');
+            }
+
+            const activeMobile = document.querySelector(`.mobile-nav-item[href="#${id}"]`);
+            if (activeMobile) {
+              activeMobile.classList.add('text-okinawa-600', 'dark:text-okinawa-400');
+              activeMobile.classList.remove('text-gray-400', 'dark:text-gray-500');
+            }
+          }
+        });
+      });
+
+    });
+  </script>
 </body>
 </html>
