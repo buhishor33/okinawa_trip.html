@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
-    <title>沖繩爆肝</title>
+  <title>沖繩爆肝</title>
   <link rel="apple-touch-icon" href="icon.png">
   <meta name="apple-mobile-web-app-title" content="沖繩爆肝">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+  <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
@@ -356,15 +356,16 @@
       <div class="lg:col-span-9 space-y-8" id="itineraryContent">
 
         <!-- ============================================================ -->
-        <!-- 🚗 泊車資訊（折疊區塊） -->
+        <!-- 🚗 泊車資訊（折疊區塊） — 預設為展開，點擊標題才收合 -->
         <!-- ============================================================ -->
         <section id="section-parking" class="scroll-mt-24">
           <div class="day-section">
             <div class="day-header" data-day="parking">
               <span>🚗 泊車資訊（點我展開／收合）</span>
-              <span class="toggle-icon">▶</span>
+              <span class="toggle-icon">▼</span> <!-- 預設為展開，圖示朝下 -->
             </div>
-            <div class="day-content collapsed p-4 md:p-6 space-y-4" id="dayContentparking">
+            <!-- 移除 collapsed 類別，預設展開 -->
+            <div class="day-content p-4 md:p-6 space-y-4" id="dayContentparking" style="max-height: none; opacity: 1;">
 
               <!-- 路易威登沖繩店 -->
               <div class="spot-card">
@@ -794,7 +795,7 @@
             <span class="text-lg font-black bg-okinawa-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">2</span>
             <div>
               <h2 class="text-xl font-bold">16/7/2026 (四) 「取車・夢幻水族館與瀨長島絕美日落」</h2>
-              <p class="text-xs text-gray-400">喜迎大佬歸隊，全員烤肉大慶典</p>
+              <p class="text-xs text-gray-400">全員烤肉大慶典</p>
             </div>
           </div>
 
@@ -846,29 +847,65 @@
             </div>
           </div>
 
-          <!-- 景點：DMM水族館 -->
-          <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
-            <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
-              <span class="time-badge">10:45</span>
-              <label class="flex items-center gap-2 mt-2 cursor-pointer">
-                <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
-                <span class="text-xs text-gray-400">已打卡</span>
-              </label>
-            </div>
-            <div class="flex-1 space-y-3">
-              <div class="flex justify-between items-start gap-3 flex-wrap">
-                <h3 class="text-lg font-extrabold">🐠 DMM Kariyushi 水族館</h3>
-                <a href="https://www.google.com/maps/search/?api=1&query=DMM+Kariyushi+Aquarium+Okinawa" target="_blank" class="map-btn">🗺️ 導航</a>
-              </div>
-              <div class="meta-box">
-                <div class="meta-header">
-                  <span>🚗 交通：自駕約 15 分鐘</span>
-                  <span>⏱️ 停留/活動：2 小時</span>
-                </div>
-                <p>• <strong>備註/攻略：</strong> 11:00 有可愛水獺觸摸與餵食體驗！還有巨大的玻璃地板水槽，室內冷氣充足適合正午避暑。</p>
-              </div>
-            </div>
-          </div>
+         <!-- 景點：Workman Plus 豊見城店 -->
+<div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="shopping">
+  <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+    <span class="time-badge">10:30</span>
+    <label class="flex items-center gap-2 mt-2 cursor-pointer">
+      <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+      <span class="text-xs text-gray-400">已打卡</span>
+    </label>
+  </div>
+  <div class="flex-1 space-y-3">
+    <div class="flex justify-between items-start gap-3 flex-wrap">
+      <div>
+        <h3 class="text-lg font-extrabold">🧥 Workman Plus 豊見城店</h3>
+        <p class="text-xs text-gray-400">〒901-0231 沖縄県豊見城市我那覇510</p>
+      </div>
+      <div class="flex gap-1.5">
+        <a href="https://www.google.com/maps/search/?api=1&query=Workman+Plus+%E8%B1%8A%E8%A6%8B%E5%9F%8E%E5%BA%97" target="_blank" class="map-btn">🗺️ 導航</a>
+      </div>
+    </div>
+    <div class="meta-box">
+      <div class="meta-header">
+        <span>🚗 交通：自駕約 10 分鐘（從租車公司）</span>
+        <span>⏱️ 停留/活動：45 分鐘</span>
+      </div>
+      <p>• <strong>🎯 Alex 任務：</strong> 日本知名機能服飾品牌，CP值極高！趁機入手「冷氣衫」與「機能褲」，舒適應對沖繩炎熱天氣。</p>
+      <p class="mt-1 text-gray-400 dark:text-gray-500">📍 距離 DMM 水族館僅 5 分鐘車程，順路又方便！</p>
+    </div>
+  </div>
+</div>
+
+<!-- 景點：DMM水族館 -->
+<div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="scenic">
+  <div class="md:w-32 flex md:flex-col justify-between items-center md:items-start border-b md:border-b-0 md:border-r border-gray-100 dark:border-slate-800 pb-3 md:pb-0 md:pr-4">
+    <span class="time-badge">11:45</span>
+    <label class="flex items-center gap-2 mt-2 cursor-pointer">
+      <input type="checkbox" class="visit-checkbox w-5 h-5 rounded border-gray-300 text-okinawa-600 focus:ring-okinawa-500">
+      <span class="text-xs text-gray-400">已打卡</span>
+    </label>
+  </div>
+  <div class="flex-1 space-y-3">
+    <div class="flex justify-between items-start gap-3 flex-wrap">
+      <h3 class="text-lg font-extrabold">🐠 DMM Kariyushi 水族館</h3>
+      <a href="https://www.google.com/maps/search/?api=1&query=DMM+Kariyushi+Aquarium+Okinawa" target="_blank" class="map-btn">🗺️ 導航</a>
+    </div>
+    <div class="meta-box">
+      <div class="meta-header">
+        <span>🚗 交通：自駕約 5 分鐘（從 Workman）</span>
+        <span>⏱️ 停留/活動：3 小時（至 14:45）</span>
+      </div>
+      <p>• <strong>🐾 餵食體驗時間表：</strong></p>
+      <ul class="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-0.5 ml-1">
+        <li>🦦 水獺餵食體驗 — <strong>13:00</strong></li>
+        <li>🐠 海水魚餵食 — <strong>13:00</strong></li>
+        <li>🦥 樹懶餵食體驗 — <strong>14:15</strong></li>
+      </ul>
+      <p class="mt-1.5">• <strong>備註/攻略：</strong> 可愛水獺觸摸與餵食體驗超治癒！還有巨大的玻璃地板水槽，室內冷氣充足，適合正午避暑。</p>
+    </div>
+  </div>
+</div>
 
           <!-- 景點：Outlet -->
           <div class="spot-card glow-card flex flex-col md:flex-row gap-5" data-category="shopping">
@@ -911,10 +948,10 @@
               <div class="meta-box text-rose-800 dark:text-rose-300 border-coral-500 bg-coral-500/5">
                 <div class="meta-header text-coral-600 dark:text-coral-400">
                   <span>🚗 交通：自駕約 10 分鐘</span>
-                  <span>⏱️ 停留/活動：2 小時</span>
+                  <span>⏱️ 停留/活動：1 小時</span>
                 </div>
-                <p>• <strong>🔥 重要接人任務：</strong> Jeffery 大約於 18:00 需獨自開車前往機場接「大佬」！</p>
-                <p class="mt-1 font-medium">其他組員留在瀨長島散步拍照、品嚐熱門「幸福鬆餅」，看完夕陽後自行搭乘計程車回飯店與大部隊會合。</p>
+               <p>• <strong>🌊 全員暢遊瀨長島：</strong> 大隊一起在 Umikaji Terrace 悠閒散步、拍攝絕美海景，並品嚐熱門的「幸福鬆餅」。</p>
+      <p class="mt-1 font-medium">欣賞完夕陽後，全員一同自駕前往享用極上和牛燒肉晚餐！</p>
               </div>
             </div>
           </div>
@@ -1302,7 +1339,7 @@
                   <span>🚗 交通：-</span>
                   <span>⏱️ 停留/活動：2.5 小時</span>
                 </div>
-                <p>• <strong>備註/攻略：</strong> 在寬大且冷氣強效的巨型商場內散步，血拼大牌服飾，或是去 BIC CAMERA 購入日本免稅家電與美妝。</p>
+                <p>• <strong>備註/攻略：</strong> 在寬大且冷氣強效的巨型商場內散步，血拼大牌服飾，或是去 3 coins/ Workman Colour/BIC CAMERA <strong>商場有郵局， 一併寄出明信片。</strong></p>
               </div>
             </div>
           </div>
@@ -1459,7 +1496,7 @@
                   <span>🚗 交通：自駕約 1.5 小時（自那霸）</span>
                   <span>⏱️ 停留/活動：3.5 小時</span>
                 </div>
-                <p>• <strong>備註/攻略：</strong> 建議提前買妥電子門票節省排隊時間。下午 13:00 有免費海豚劇場戶外演出，極為震撼！可去「Ocean Blue 咖啡廳」近距離邊賞鯊邊午餐。</p>
+                <p>• <strong>備註/攻略：</strong> 使用 Funpass。下午 13:00 有免費海豚劇場戶外演出，極為震撼！可去「Ocean Blue 咖啡廳」近距離邊賞鯊邊午餐。</p>
               </div>
             </div>
           </div>
@@ -1486,7 +1523,7 @@
                   <span>🚗 交通: 自駕約 40 分鐘</span>
                   <span>⏱️ 停留/活動：1 小時</span>
                 </div>
-                <p>• <strong>備註/攻略：</strong> 乘坐自動高爾夫遊園車登頂。頂樓鐘樓展望海景超夢幻，室內設有漂亮的貝殼博物館，特別上鏡！</p>
+                <p>• <strong>備註/攻略：</strong> 使用 Funpass。乘坐自動高爾夫遊園車登頂。頂樓鐘樓展望海景超夢幻，室內設有漂亮的貝殼博物館，特別上鏡！</p>
               </div>
             </div>
           </div>
@@ -1561,7 +1598,7 @@
                   <span>🚗 交通：計程車約 15 分鐘（往返酒店）</span>
                   <span>⏱️ 停留/活動：2 小時</span>
                 </div>
-                <p>• <strong>🚨 嚴禁酒後開車：</strong> 喝酒隊員請一律乘計程車往返酒店，或由不沾酒的司機負責代駕，平平安安享受沖繩最後一夜！</p>
+                <p>• <strong>🚨 已經預約10：15 場次</strong> 嚴禁酒後開車：喝酒隊員請一律乘計程車往返酒店，由不沾酒的ALEX負責代駕，平平安安享受沖繩最後一夜！</p>
               </div>
             </div>
           </div>
@@ -2150,26 +2187,28 @@
       });
 
 
-      // --- 2. 手風琴折疊/展開控制 (泊車資訊) ---
-      const parkingHeader = document.querySelector('.day-header[data-day="parking"]');
-      if (parkingHeader) {
-        parkingHeader.addEventListener('click', () => {
-          const content = document.getElementById('dayContentparking');
-          const icon = parkingHeader.querySelector('.toggle-icon');
-          
-          if (content.classList.contains('collapsed')) {
-            content.classList.remove('collapsed');
-            content.style.maxHeight = content.scrollHeight + 'px';
-            content.style.opacity = '1';
-            icon.textContent = '▼';
-          } else {
-            content.classList.add('collapsed');
-            content.style.maxHeight = '0px';
-            content.style.opacity = '0';
-            icon.textContent = '▶';
-          }
-        });
-      }
+    // 修正手風琴折疊/展開控制 (泊車資訊) - 預設展開，僅點擊收合
+const parkingHeader = document.querySelector('.day-header[data-day="parking"]');
+if (parkingHeader) {
+  parkingHeader.addEventListener('click', function() {
+    const content = document.getElementById('dayContentparking');
+    const icon = this.querySelector('.toggle-icon');
+    
+    if (content.classList.contains('collapsed')) {
+      // 展開時：移除 collapsed 類別，並將 max-height 設為 auto 以適應內容
+      content.classList.remove('collapsed');
+      content.style.maxHeight = 'none'; // 使用 'none' 讓高度由內容決定，避免重疊
+      content.style.opacity = '1';
+      icon.textContent = '▼';
+    } else {
+      // 收合時：加上 collapsed 類別，並將 max-height 設為 0
+      content.classList.add('collapsed');
+      content.style.maxHeight = '0px';
+      content.style.opacity = '0';
+      icon.textContent = '▶';
+    }
+  });
+}
 
 
       // --- 3. 踩點勾選進度計算 ---
